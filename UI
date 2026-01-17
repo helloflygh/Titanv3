@@ -59,11 +59,7 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.05); cursor: pointer;
             white-space: nowrap;
         }
-        /* Applied the "Pop" to menu items */
-        .menu-item:hover { 
-            transform: scale(1.05); 
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .menu-item:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.2); }
 
         .menu-icon { width: 20px; height: 20px; margin-right: 12px; object-fit: contain; }
 
@@ -104,15 +100,8 @@
         }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; padding: 20px; width: 100%; max-width: 1200px; justify-content: center; }
-        
-        .item { 
-            background: #fff; border-radius: 14px; overflow: hidden; 
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            cursor: pointer; 
-        }
-        /* Added the "Pop" to game tiles */
+        .item { background: #fff; border-radius: 14px; overflow: hidden; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
         .item:hover { transform: scale(1.08); z-index: 10; }
-        
         .item img { width: 100%; height: 150px; object-fit: cover; }
         .title { padding: 10px; text-align: center; font-weight: bold; }
 
@@ -168,15 +157,12 @@
                     <span>Panic on New Tab</span>
                     <label class="switch"><input type="checkbox" id="panicTabToggle" onchange="saveSettings()"><span class="slider"></span></label>
                 </div>
-                
                 <label>Panic URL:</label>
                 <input type="text" id="panicUrlInput" class="settings-input" onchange="saveSettings()" placeholder="https://clever.com/in/chandler">
-                
                 <div class="toggle-row">
                     <span>Enable Hotkey</span>
                     <label class="switch"><input type="checkbox" id="shortcutToggle" onchange="saveSettings()"><span class="slider"></span></label>
                 </div>
-
                 <label>Hotkey: Ctrl +</label>
                 <input type="text" id="panicKeyInput" class="settings-input" style="width:50px; text-align:center;" maxlength="1" onchange="saveSettings()">
             </div>
@@ -186,8 +172,11 @@
     <div id="homePage" class="page-content active-page">
         <img src="https://raw.githubusercontent.com/helloflygh/games/main/IMG_3750-removebg-preview.png">
         <div style="background:var(--glass-bg); padding:20px; border-radius:15px; margin:20px; max-width: 600px;">
-            <h2>Version 4.1</h2>
-            <p>UI "Pop" effects applied globally. Enhanced responsiveness.</p>
+            <h2>Version 3.0</h2>
+            <h1>Whats new?</h1>
+            <p>This update fetures</p>
+            <h1>R.I.P. S4turn</h1>
+            <p>The district deleted s4turn, and now its being redevoloped. when its back, we will put the link here.</p>
         </div>
         <button class="blank-btn" onclick="openInBlank()">Open in about:blank</button>
     </div>
@@ -309,7 +298,22 @@
 
         function openInBlank() {
             let win = window.open('about:blank', '_blank');
-            if (win) { win.document.write(document.documentElement.outerHTML); win.document.close(); }
+            if (win) {
+                const doc = win.document;
+                doc.open();
+                doc.write(`
+                    <html>
+                    <head>
+                        <title>about:blank</title>
+                        <style>body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }</style>
+                    </head>
+                    <body>
+                        ${document.documentElement.outerHTML}
+                    </body>
+                    </html>
+                `);
+                doc.close();
+            }
         }
     </script>
 </body>
