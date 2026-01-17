@@ -187,11 +187,11 @@
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             <div class="grid" id="grid">
                 <div class="item" data-title="1v1 LOL" onclick="openRawGame('1v1lol.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"><div class="title">1v1 LOL</div></div>
-                <div class="item" data-title="basket bros" onclick="openRawGame('basketbros.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"><div class="title">Basket Bros</div></div>
+                <div class="item" data-title="basket bros" onclick="openRawGame('BasketBros.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"><div class="title">Basket Bros</div></div>
                 <div class="item" data-title="basketball legends" onclick="openRawGame('basketball-legends.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/legends.jpeg"><div class="title">Basketball Legends</div></div>
-                <div class="item" data-title="basket random" onclick="openRawGame('basket-random.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"><div class="title">Basket Random</div></div>
+                <div class="item" data-title="basket random" onclick="openRawGame('Basket-Random.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"><div class="title">Basket Random</div></div>
                 <div class="item" data-title="bacon may dye" onclick="openRawGame('bacon-may-dye.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.jpeg"><div class="title">Bacon May Dye</div></div>
-                <div class="item" data-title="bacon may dye beta" onclick="openRawGame('bacon-may-dye-beta.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"><div class="title">Bacon May Dye (BETA)</div></div>
+                <div class="item" data-title="bacon may dye beta" onclick="openRawGame('Bacon-May-Dye-beta.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"><div class="title">Bacon May Dye (BETA)</div></div>
                 <div class="item" data-title="bitlife" onclick="openRawGame('bitlife.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(36).jpeg"><div class="title">Bitlife</div></div>
                 <div class="item" data-title="crazy cattle 3d" onclick="openRawGame('crazy-cattle.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.jpeg"><div class="title">Crazy Cattle 3D</div></div>
                 <div class="item" data-title="drift boss" onclick="openRawGame('drift-boss.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.27.46%20PM.png"><div class="title">Drift Boss</div></div>
