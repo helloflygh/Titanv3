@@ -1,61 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Loader</title>
-    <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
-        
-        /* The main game window */
-        #viewer { width: 100%; height: 100%; border: none; }
+<meta charset="UTF-8">
+<title>Ultimate Game Stash - Loader</title>
 
-        /* The Panic Button - STAYS ON TOP */
-        .panic-btn {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            font-size: 24px; padding: 18px 50px; color: #000 !important; 
-            background: #ff3333; font-family: 'Arial Black', sans-serif;
-            cursor: pointer; z-index: 99999; border-radius: 12px;
-            font-weight: 900; border: 4px solid #000;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5); text-transform: uppercase;
-        }
+<style>
+    /* Prevent scrolling on the main container */
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: sans-serif;
+    }
 
-        /* The Disguise Overlay */
-        #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
-        #panic-iframe { width: 100%; height: 100%; border: none; }
-    </style>
+    /* THE GAME AREA: This is where your pasted code lives */
+    #game-container {
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Allows the game to scroll if needed */
+        position: relative;
+        z-index: 1;
+    }
+
+    /* --- Large Red Panic Button --- */
+    .panic-btn {
+        position: fixed; 
+        top: 15px; 
+        right: 20px; /* Moved to side so it doesn't block center of game */
+        font-size: 18px; 
+        padding: 12px 30px; 
+        color: #000000 !important; 
+        background: #ff3333; 
+        font-family: 'Arial Black', sans-serif;
+        cursor: pointer; 
+        z-index: 99999; /* Keeps it above everything */
+        border-radius: 8px;
+        font-weight: 900; 
+        border: 3px solid #000;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        transition: all 0.2s ease-in-out;
+        text-transform: uppercase;
+    }
+
+    .panic-btn:hover { 
+        transform: scale(1.05); 
+        background: #ff4d4d;
+    }
+
+    /* --- Panic Overlay (The Fake Screen) --- */
+    #panic-overlay { 
+        display: none; 
+        position: fixed; 
+        top: 0; left: 0; 
+        width: 100vw; height: 100vh; 
+        background: #fff; 
+        z-index: 100000; 
+    }
+    #panic-iframe { width: 100%; height: 100%; border: none; }
+    
+    .close-panic {
+        position: absolute; top: 15px; left: 15px; 
+        font-size: 35px; cursor: pointer; color: #000 !important;
+        font-weight: bold;
+        z-index: 100001;
+        opacity: 0.1; /* Keeps it hidden so teachers don't see the 'X' */
+    }
+    .close-panic:hover { opacity: 1; }
+</style>
 </head>
 <body>
 
-    <button class="panic-btn" onclick="doPanic()">PANIC</button>
-    <iframe id="viewer"></iframe>
+<button class="panic-btn" onclick="doPanic()">PANIC</button>
 
-    <div id="panic-overlay">
-        <iframe id="panic-iframe"></iframe>
+<div id="game-container">
+    <div style="color: white; text-align: center; padding-top: 100px;">
+        <h1>Game Stash Ready</h1>
+        <p>Paste your game code inside the 'game-container' div in the HTML.</p>
     </div>
 
-    <script>
-        // 1. PASTE YOUR ENTIRE CODE FROM ULTIMATE GAME STASH BETWEEN THE BACKTICKS BELOW
-        const rawGameCode = `
-        
-        PASTE_YOUR_CODE_HERE
-        
-        `;
+    </div>
 
-        // 2. This part injects the code safely into the blank iframe
-        const blob = new Blob([rawGameCode], { type: 'text/html' });
-        document.getElementById('viewer').src = URL.createObjectURL(blob);
+<div id="panic-overlay">
+    <span class="close-panic" onclick="closePanic()">&times;</span>
+    <iframe id="panic-iframe"></iframe>
+</div>
 
-        // 3. Panic Logic
-        const PANIC_URL = "https://clever.com"; 
-        function doPanic() {
-            document.getElementById("panic-iframe").src = PANIC_URL;
-            document.getElementById("panic-overlay").style.display = "block";
-        }
+<script>
+const PANIC_URL = "https://clever.com"; 
 
-        window.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
-        });
-    </script>
+function doPanic() {
+    document.getElementById("panic-iframe").src = PANIC_URL;
+    document.getElementById("panic-overlay").style.display = "block";
+}
+
+function closePanic() {
+    document.getElementById("panic-overlay").style.display = "none";
+    document.getElementById("panic-iframe").src = "";
+}
+
+// Hotkey: Ctrl + X triggers panic
+window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key.toLowerCase() === 'x') {
+        e.preventDefault(); 
+        doPanic();
+    }
+});
+</script>
+
 </body>
 </html>
