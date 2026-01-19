@@ -1,110 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>HTML Loader with Panic Button</title>
+// 1. Paste your entire game HTML code between the backticks (``)
+const gameCode = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Game</title>
+    </head>
+    <body>
+        <h1>Your Game Code Goes Here</h1>
+    </body>
+    </html>
+`;
 
-<style>
-    /* Ensures the wrapper fills the whole screen */
-    html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-color: #000;
-    }
+// 2. This logic turns that text into a working game inside the frame
+const blob = new Blob([gameCode], { type: 'text/html' });
+const url = URL.createObjectURL(blob);
+document.getElementById('viewer').src = url;
 
-    /* The main window where your new HTML code will live */
-    #viewer {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: white;
-    }
-
-    /* --- Isolated Panic Button --- */
-    .panic-btn {
-        position: fixed; 
-        top: 20px; 
-        left: 50%; 
-        transform: translateX(-50%);
-        font-size: 24px; 
-        padding: 18px 50px; 
-        color: #000000 !important; 
-        background: #ff3333; /* Red */
-        font-family: 'Arial Black', sans-serif;
-        cursor: pointer; 
-        z-index: 99999; /* Stays on top of everything */
-        border-radius: 12px;
-        font-weight: 900; 
-        border: 4px solid #000; 
-        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-        transition: all 0.2s ease-in-out;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-    }
-
-    .panic-btn:hover { transform: translateX(-50%) scale(1.08); background: #ff4d4d; }
-    .panic-btn:active { transform: translateX(-50%) scale(0.92); }
-
-    /* --- Panic Overlay (The Disguise) --- */
-    #panic-overlay { 
-        display: none; 
-        position: fixed; 
-        top: 0; left: 0; 
-        width: 100vw; height: 100vh; 
-        background: #fff; 
-        z-index: 100000; 
-    }
-    #panic-iframe { width: 100%; height: 100%; border: none; }
-    
-    .close-panic {
-        position: absolute; top: 15px; left: 15px; 
-        font-size: 35px; cursor: pointer; color: #000 !important;
-        font-weight: bold; z-index: 100001;
-    }
-</style>
-</head>
-
-<body>
-
-    <button class="panic-btn" onclick="doPanic()">PANIC</button>
-
-    <iframe id="viewer" srcdoc='
-        <html>
-            <body style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
-                <h1>Paste your game/HTML code here!</h1>
-            </body>
-        </html>
-    '></iframe>
-
-    <div id="panic-overlay">
-        <span class="close-panic" onclick="closePanic()">&times;</span>
-        <iframe id="panic-iframe"></iframe>
-    </div>
-
-    <script>
-        // Set your "Safe" URL here
-        const PANIC_URL = "https://clever.com"; 
-
-        function doPanic() {
-            document.getElementById("panic-iframe").src = PANIC_URL;
-            document.getElementById("panic-overlay").style.display = "block";
-        }
-
-        function closePanic() {
-            document.getElementById("panic-overlay").style.display = "none";
-            document.getElementById("panic-iframe").src = "";
-        }
-
-        // Emergency Hotkey (Ctrl + X)
-        window.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key.toLowerCase() === 'x') {
-                e.preventDefault(); 
-                doPanic();
-            }
-        });
-    </script>
-
-</body>
-</html>
+// 3. Keep your Panic Button logic below
+const PANIC_URL = "https://clever.com"; 
+function doPanic() {
+    document.getElementById("panic-iframe").src = PANIC_URL;
+    document.getElementById("panic-overlay").style.display = "block";
+}
+function closePanic() {
+    document.getElementById("panic-overlay").style.display = "none";
+}
