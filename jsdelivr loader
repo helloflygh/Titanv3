@@ -12,30 +12,30 @@
         padding: 0;
         width: 100%;
         height: 100%;
-        overflow: hidden; /* Prevents double scrollbars */
+        overflow: hidden; 
         background: #000;
         display: flex;
-        flex-direction: column; /* Stacks button bar on top of game */
+        flex-direction: column;
     }
 
-    /* --- TOP BAR (Forces centering) --- */
+    /* --- TOP BAR (Centered Layout) --- */
     #top-bar {
         width: 100%;
         display: flex;
         justify-content: center; /* Centers horizontally */
-        align-items: center;    /* Centers vertically */
-        padding: 10px 0;
+        align-items: flex-start; /* Aligns to top */
+        padding-top: 20px;       /* Distance from the very top edge */
         background: transparent;
-        position: absolute;      /* Floats over the game */
+        position: absolute;      
         top: 0;
         left: 0;
-        z-index: 99999;          /* Always on top */
+        z-index: 99999;          
         pointer-events: none;    /* Allows clicking the game behind the bar */
     }
 
     /* --- Panic Button --- */
     .panic-btn {
-        pointer-events: auto;    /* Makes button clickable again */
+        pointer-events: auto;    /* Makes button clickable */
         font-size: 20px; 
         padding: 12px 50px; 
         color: #000 !important; 
@@ -56,14 +56,14 @@
 
     /* --- THE GAME AREA --- */
     #game-container {
-        flex-grow: 1;           /* Fills the remaining screen space */
+        flex-grow: 1;
         width: 100%;
         height: 100%;
-        overflow: auto;         /* Allows game to scroll if it's large */
+        overflow: auto;
         position: relative;
     }
 
-    /* --- Panic Overlay (The Fake Screen) --- */
+    /* --- Panic Overlay --- */
     #panic-overlay { 
         display: none; 
         position: fixed; 
@@ -85,10 +85,9 @@
 <div id="game-container">
     <div style="color: white; text-align: center; margin-top: 150px;">
         <h2>Game Area</h2>
-        <p>Paste your game code here. The red button will stay centered above it.</p>
+        <p>The PANIC button is now fixed in the top-middle area.</p>
     </div>
-
-    </div>
+</div>
 
 <div id="panic-overlay">
     <span class="close-panic" onclick="closePanic()">&times;</span>
