@@ -14,38 +14,125 @@
 <body>
 
 <div class="container">
-    <h2>Search Bar</h2>
-    <input type="text" id="userInput" placeholder="Enter text to encode...">
-    <button onclick="launchIframe()">Go</button>
+    <h2>T!tan Proxy</h2>
+    <input type="text" id="userInput" placeholder="Search T!tan Proxy or type a URL">
+    <button onclick="launchIframe()">Search</button>
 </div>
 
 <script>
     function launchIframe() {
         const input = document.getElementById('userInput').value;
-        const domain = "https://example.com/"; // Replace with your desired domain
+        const domain = "https://allthelove.bfcontrol.com.mx/render.html?url="; 
         
-        // 1. Encode input to Base64
-        // btoa() creates a Base64 string from binary data
         const encoded = btoa(input);
-        
-        // 2. Combine domain and encoded string
         const fullUrl = domain + encoded;
 
-        // 3. Open about:blank
         const newWin = window.open('about:blank', '_blank');
 
-        // 4. Inject the Iframe into the about:blank page
         if (newWin) {
             newWin.document.write(`
-                <style>
-                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-                    iframe { width: 100%; height: 100%; border: none; }
-                </style>
-                <iframe src="${fullUrl}"></iframe>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Classes</title>
+                    <style>
+                        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+                        
+                        /* --- Panic Button on Main Page --- */
+                        #top-bar {
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            position: absolute;
+                            top: 20px;
+                            left: 0;
+                            z-index: 9999;
+                            pointer-events: none;
+                        }
+
+                        .panic-btn {
+                            pointer-events: auto;
+                            font-size: 18px;
+                            padding: 10px 40px;
+                            color: #000;
+                            background: #ff3333;
+                            font-family: 'Arial Black', sans-serif;
+                            cursor: pointer;
+                            border-radius: 8px;
+                            font-weight: 900;
+                            border: 3px solid #000;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                            text-transform: uppercase;
+                            transition: transform 0.1s;
+                        }
+
+                        /* --- The Proxy Iframe --- */
+                        #main-game-iframe { width: 100%; height: 100%; border: none; }
+
+                        /* --- Panic Overlay (The Fake Screen) --- */
+                        #panic-overlay { 
+                            display: none; 
+                            position: fixed; 
+                            top: 0; left: 0; 
+                            width: 100vw; height: 100vh; 
+                            background: #fff; 
+                            z-index: 1000000; 
+                        }
+                        #panic-iframe { width: 100%; height: 100%; border: none; }
+
+                        /* --- The Close 'X' Button --- */
+                        .close-panic { 
+                            position: absolute; 
+                            top: 15px; 
+                            right: 20px; 
+                            cursor: pointer; 
+                            font-size: 24px;
+                            font-family: Arial, sans-serif;
+                            color: #ccc; /* Subtle grey color */
+                            font-weight: bold;
+                            z-index: 1000001;
+                            user-select: none;
+                        }
+                        .close-panic:hover { color: #999; }
+                    </style>
+                </head>
+                <body>
+                    <div id="top-bar">
+                        <button class="panic-btn" onclick="doPanic()">PANIC</button>
+                    </div>
+
+                    <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
+
+                    <div id="panic-overlay">
+                        <span class="close-panic" onclick="closePanic()">×</span>
+                        <iframe id="panic-iframe"></iframe>
+                    </div>
+
+                    <script>
+                        const PANIC_URL = "https://clever.com"; 
+
+                        function doPanic() {
+                            document.getElementById("panic-iframe").src = PANIC_URL;
+                            document.getElementById("panic-overlay").style.display = "block";
+                        }
+
+                        function closePanic() {
+                            document.getElementById("panic-overlay").style.display = "none";
+                            document.getElementById("panic-iframe").src = "";
+                        }
+
+                        window.addEventListener('keydown', (e) => {
+                            if (e.ctrlKey && e.key.toLowerCase() === 'x') {
+                                doPanic();
+                            }
+                        });
+                    <\/script>
+                </body>
+                </html>
             `);
             newWin.document.close();
         } else {
-            alert("Pop-up blocked! Please allow pop-ups for this site.");
+            alert("Pop-up blocked!");
         }
     }
 </script>
