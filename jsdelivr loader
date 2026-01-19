@@ -1,27 +1,61 @@
-// 1. Paste your entire game HTML code between the backticks (``)
-const gameCode = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Game</title>
-    </head>
-    <body>
-        <h1>Your Game Code Goes Here</h1>
-    </body>
-    </html>
-`;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Loader</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+        
+        /* The main game window */
+        #viewer { width: 100%; height: 100%; border: none; }
 
-// 2. This logic turns that text into a working game inside the frame
-const blob = new Blob([gameCode], { type: 'text/html' });
-const url = URL.createObjectURL(blob);
-document.getElementById('viewer').src = url;
+        /* The Panic Button - STAYS ON TOP */
+        .panic-btn {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            font-size: 24px; padding: 18px 50px; color: #000 !important; 
+            background: #ff3333; font-family: 'Arial Black', sans-serif;
+            cursor: pointer; z-index: 99999; border-radius: 12px;
+            font-weight: 900; border: 4px solid #000;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5); text-transform: uppercase;
+        }
 
-// 3. Keep your Panic Button logic below
-const PANIC_URL = "https://clever.com"; 
-function doPanic() {
-    document.getElementById("panic-iframe").src = PANIC_URL;
-    document.getElementById("panic-overlay").style.display = "block";
-}
-function closePanic() {
-    document.getElementById("panic-overlay").style.display = "none";
-}
+        /* The Disguise Overlay */
+        #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
+        #panic-iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <button class="panic-btn" onclick="doPanic()">PANIC</button>
+    <iframe id="viewer"></iframe>
+
+    <div id="panic-overlay">
+        <iframe id="panic-iframe"></iframe>
+    </div>
+
+    <script>
+        // 1. PASTE YOUR ENTIRE CODE FROM ULTIMATE GAME STASH BETWEEN THE BACKTICKS BELOW
+        const rawGameCode = `
+        
+        PASTE_YOUR_CODE_HERE
+        
+        `;
+
+        // 2. This part injects the code safely into the blank iframe
+        const blob = new Blob([rawGameCode], { type: 'text/html' });
+        document.getElementById('viewer').src = URL.createObjectURL(blob);
+
+        // 3. Panic Logic
+        const PANIC_URL = "https://clever.com"; 
+        function doPanic() {
+            document.getElementById("panic-iframe").src = PANIC_URL;
+            document.getElementById("panic-overlay").style.display = "block";
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
+        });
+    </script>
+</body>
+</html>
