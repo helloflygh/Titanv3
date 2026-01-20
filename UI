@@ -76,13 +76,27 @@
 
         #homePage img { width: 100%; max-width: 750px; margin-top: 120px; height: auto; }
         
-        /* Home Quote Styling */
         .quote-box {
-            font-style: italic;
-            font-weight: bold;
-            margin-top: 15px;
-            min-height: 24px;
-            transition: opacity 0.5s ease;
+            font-style: italic; font-weight: bold; margin-top: 15px;
+            min-height: 24px; transition: opacity 0.5s ease;
+        }
+
+        .full-width-container {
+            position: relative; width: 95vw; max-width: 1300px; margin: 40px auto; padding: 30px;
+            background: var(--glass-bg); backdrop-filter: var(--glass-blur); border-radius: 20px;
+        }
+
+        .proxy-container {
+            background: rgba(255,255,255,0.3); padding: 30px; border-radius: 15px; margin-top: 20px;
+        }
+        .proxy-input { 
+            width: 100%; max-width: 400px; padding: 15px; border: none; border-radius: 30px; 
+            margin-bottom: 15px; outline: none;
+        }
+
+        #soundboard-frame {
+            width: 100%; height: 80vh; border: none; border-radius: 15px;
+            background: #000;
         }
 
         .blank-btn {
@@ -91,11 +105,6 @@
             font-weight: bold; transition: 0.3s; margin-top: 20px; margin-bottom: 50px;
         }
         .blank-btn:hover { transform: scale(1.05); }
-
-        .full-width-container {
-            position: relative; width: 95vw; max-width: 1300px; margin: 40px auto; padding: 30px;
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); border-radius: 20px;
-        }
 
         #req-btn {
             position: absolute; top: 20px; right: 20px;
@@ -122,20 +131,8 @@
             border-radius: 30px; border: none; outline: none; 
         }
 
-        /* --- Overlays --- */
         #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 30000; }
         #panic-iframe { width: 100%; height: 100%; border: none; }
-
-        /* Settings */
-        .settings-container { padding: 15px 25px; text-align: left; }
-        .settings-input { width: 90%; padding: 8px; margin: 8px 0; border-radius: 5px; border: 1px solid #000; }
-        .toggle-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
-        .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--accent-color); }
-        input:checked + .slider:before { transform: translateX(26px); }
     </style>
 </head>
 <body onload="initSite()">
@@ -148,6 +145,9 @@
         <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/T!tan-sidebar-logo.png" class="sidebar-logo" onclick="changeContent('homePage')">
         <div id="mainLinks">
             <div class="menu-item" onclick="changeContent('gamesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/pngimg.com%20-%20gamepad_PNG58.png" class="menu-icon">Games</div>
+            <div class="menu-item" onclick="changeContent('soundboardPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soundboard-icon.png" class="menu-icon">Soundboards</div>
+            <div class="menu-item" onclick="changeContent('proxiesPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/proxies.png" class="menu-icon">Proxies</div>
+            <div class="menu-item" onclick="window.open('https://sites.google.com/gse.cusd80.com/blooket-hax', '_blank')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
             <div class="menu-item" onclick="toggleSettings(true)"><img src="https://raw.githubusercontent.com/helloflygh/games/main/settings-icon.png" class="menu-icon">Settings</div>
         </div>
         <div id="settingsMenu" style="display:none;">
@@ -165,11 +165,14 @@
         <img src="https://raw.githubusercontent.com/helloflygh/games/main/IMG_3750-removebg-preview.png">
         <div style="background:var(--glass-bg); padding:20px; border-radius:15px; margin:20px; max-width: 600px; width: 90%;">
             <h2>Version 3.0</h2>
-            <div id="quoteDisplay" class="quote-box">Loading quote...</div>
-            <h1>Whats New?</h1>
-            <p> This update features </p>
-            <h1> S4turn is back!!! </h1>
-            <p> S4turn has been hard at work redoveloping its UI and i am honored to announce the new link. (I gotta put link here when its done) </p>
+            <div id="quoteDisplay" class="quote-box">Welcome to T!tan</div>
+            <h1> Whats new? </h1>
+            <p> In the latest update, we: </p>
+            <h1> R.I.P S4turn.</h1>
+            <p> A teacher reported s4turn to the district, leaving s4turn with its UI and code. S4turn is redeveloping its site, to be better then before, and when its finished I will put the link here.</p>
+            <h1> Whats T!tan?</h1>
+            <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
+           <p> By using T!tan, you agree to our terms of service.</p>
         </div>
         <button class="blank-btn" onclick="openInBlank()">Open in about:blank</button>
     </div>
@@ -177,7 +180,6 @@
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
             <a href="https://sites.google.com/gse.cusd80.com/titan/page_3/game-requests" id="req-btn" target="_blank">📃 Request</a>
-            
             <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%;"></h1>
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
@@ -212,36 +214,82 @@
                 <div class="item" data-title="snow rider"><a href="https://sites.google.com/gse.cusd80.com/titan/page_2/page_13" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/SnowRIder.png"></a><div class="title">Snow Rider</div></div>
                 <div class="item" data-title="stickman climb"><a href="https://sites.google.com/gse.cusd80.com/titan/page_2/stickman-climb/page" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
                 <div class="item" data-title="stickman hook"><a href="https://sites.google.com/gse.cusd80.com/titan/page_2/stickman-hook/page" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
-                <div class="item" data-title="temple run 2"><a href="https://sites.google.com/gse.cusd80.com/titan/page_2/page_11" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.02.24%20PM.png"></a><div class="title">Temple Run 2</div></div>
-                
-                <div id="no-results" style="display:none; grid-column: 1/-1; padding: 40px;">
-                    <p>No results found.</p>
-                </div>
+                <div class="item" data-title="temple run 2"><a href="https://sites.google.com/gse.cusd80.com/titan/page_2/page_11" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png"></a><div class="title">Temple Run 2</div></div>
             </div>
+            <div id="no-results" style="display:none; padding:40px;">No games found.</div>
+        </div>
+    </div>
+
+    <div id="proxiesPage" class="page-content">
+        <div class="full-width-container">
+            <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
+            <h1>Proxy Version 1.0</h1>
+            <div class="proxy-container">
+                <p>Note: Clicking search will open a cloaked tab.</p>
+                <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
+                <br>
+                <button class="blank-btn" onclick="launchProxy()">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="soundboardPage" class="page-content">
+        <div class="full-width-container">
+            <h1>Soundboards</h1>
+            <iframe id="soundboard-frame" srcdoc='
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <base href="https://cdn.jsdelivr.net/gh/genizy/soundboard@main/">
+                    <meta charset="UTF-8">
+                    <script src="sounds.js" type="module"></script>
+                    <script src="main.js" type="module"></script>
+                    <link href="style.css" rel="stylesheet">
+                    <style>
+                        body { background: #000; color: #fff !important; font-family: sans-serif; padding: 10px; }
+                        #controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+                        .control-button { padding: 10px 15px; border-radius: 8px; border: 1px solid #444; cursor: pointer; font-weight: bold; background: #222; color: #fff !important; }
+                        #searchInput { padding: 10px; border-radius: 20px; border: 1px solid #444; width: 250px; background: #222; color: #fff !important; }
+                        * { color: inherit !important; }
+                    </style>
+                </head>
+                <body>
+                    <div id="controls">
+                        <button id="toggleFavorites" class="control-button favorites-toggle">⭐ Favorites: OFF</button>
+                        <button id="toggleButton" class="control-button overlap-toggle">🔇 Overlap: OFF</button>
+                        <button id="stopButton" class="control-button stop-button">⏹️ Stop All Sounds</button>
+                        <input id="searchInput" type="text" placeholder="Search sounds...">
+                    </div>
+                    <div id="soundboard"></div>
+                </body>
+                </html>
+            '></iframe>
         </div>
     </div>
 
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "Major updates every Monday!", "Mateooooooooooooooooooooooooo", "T!tans way - Games for when teachers look away.", "R.I.P. n3bula and s4turn.", "Dont get lost in 'The Odyssey', T!tans here for YOU!", "TYSM S4turn <3", "I cooked up a T!tanic update for yall", "", "I think maverick had a lil too much of his mothers crystals", "Is this update even good?", "shoutout to our partner site, S4turn!"];
+        const quotes = ["Who actually reads these?", "35+ Games!", "Mateooooooooooooooooooooooooo", "dont get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Updates every Monday!!!", "TYSM S4turn <3", "T!tans way - Games for when teachers look away", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
+        let lastQuoteIndex = -1;
 
         function initSite() {
             document.getElementById("panicUrlInput").value = localStorage.getItem('panicLink') || 'https://clever.com';
             document.getElementById("panicTabToggle").checked = localStorage.getItem('panicTabEnabled') === 'true';
             document.getElementById("shortcutToggle").checked = localStorage.getItem('panicShortcutEnabled') !== 'false';
             document.getElementById("panicKeyInput").value = localStorage.getItem('panicKey') || 'x';
-            
-            // Start Quote Rotation
             updateQuote();
-            setInterval(updateQuote, 10000);
+            setInterval(updateQuote, 8000);
         }
 
         function updateQuote() {
             const display = document.getElementById("quoteDisplay");
+            let newIndex;
+            do { newIndex = Math.floor(Math.random() * quotes.length); } while (newIndex === lastQuoteIndex);
+            lastQuoteIndex = newIndex;
             display.style.opacity = 0;
             setTimeout(() => {
-                display.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+                display.textContent = quotes[newIndex];
                 display.style.opacity = 1;
             }, 500);
         }
@@ -300,6 +348,47 @@
             if (win) {
                 win.document.write(`<html><head><title>about:blank</title><style>body,html{margin:0;padding:0;height:100%;overflow:hidden;}</style></head><body>${document.documentElement.outerHTML}</body></html>`);
                 win.document.close();
+            }
+        }
+
+        function launchProxy() {
+            const input = document.getElementById('proxyInput').value;
+            const domain = "https://allthelove.bfcontrol.com.mx/render.html?url="; 
+            const encoded = btoa(input);
+            const fullUrl = domain + encoded;
+            const newWin = window.open('about:blank', '_blank');
+            if (newWin) {
+                newWin.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Clever | Portal</title>
+                        <style>
+                            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+                            #top-bar { width: 100%; display: flex; justify-content: center; position: absolute; top: 20px; left: 0; z-index: 9999; pointer-events: none; }
+                            .panic-btn { pointer-events: auto; font-size: 18px; padding: 10px 40px; color: #000; background: #ff3333; font-family: 'Arial Black', sans-serif; cursor: pointer; border-radius: 8px; font-weight: 900; border: 3px solid #000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); text-transform: uppercase; transition: transform 0.1s; }
+                            #main-game-iframe { width: 100%; height: 100%; border: none; }
+                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 1000000; }
+                            #panic-iframe { width: 100%; height: 100%; border: none; }
+                            .close-panic { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-family: Arial, sans-serif; color: #ccc; font-weight: bold; z-index: 1000001; user-select: none; }
+                        </style>
+                    </head>
+                    <body>
+                        <div id="top-bar"><button class="panic-btn" onclick="doPanic()">PANIC</button></div>
+                        <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
+                        <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">×</span><iframe id="panic-iframe"></iframe></div>
+                        <script>
+                            const PANIC_URL = "https://clever.com"; 
+                            function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
+                            function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
+                            window.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'x') { doPanic(); } });
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                newWin.document.close();
+            } else {
+                alert("Pop-up blocked! Please allow pop-ups.");
             }
         }
     </script>
