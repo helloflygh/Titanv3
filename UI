@@ -178,7 +178,7 @@
             <p> A teacher reported s4turn to the district, leaving s4turn with its UI and code. S4turn is redeveloping its site, to be better then before, and when its finished I will put the link here.</p>
             <h1> Whats T!tan?</h1>
             <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
-           <p> By using T!tan, you agree to our terms of service.</p>
+            <p> By using T!tan, you agree to our terms of service.</p>
         </div>
         <button class="blank-btn" onclick="openInBlank()">Open in about:blank</button>
     </div>
@@ -190,38 +190,38 @@
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
-                <div class="item" data-title="1v1 LOL"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/lol/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">1v1 LOL</div></div>
-                <div class="item" data-title="basket bros"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/basket-bros/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"></a><div class="title">Basket Bros</div></div>
-                <div class="item" data-title="basketball legends"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/basketball-legends/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/legends.jpeg"></a><div class="title">Basketball Legends</div></div>
-                <div class="item" data-title="basket random"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/basket-random/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"></a><div class="title">Basket Random</div></div>
-                <div class="item" data-title="bacon may dye"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/bacon-may-dye/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.jpeg"></a><div class="title">Bacon May Dye</div></div>
-                <div class="item" data-title="bacon may dye beta"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/bacon-may-fly-beta/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"></a><div class="title">Bacon May Dye (BETA)</div></div>
-                <div class="item" data-title="bitlife"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/bitlife/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(36).jpeg"></a><div class="title">Bitlife</div></div>
-                <div class="item" data-title="crazy cattle 3d"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/crazy-cattle/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.jpeg"></a><div class="title">Crazy Cattle 3D</div></div>
-                <div class="item" data-title="drift boss"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/drift-boss/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.27.46%20PM.png"></a><div class="title">Drift Boss</div></div>
-                <div class="item" data-title="drive mad"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/drive-mad/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(35).jpeg"></a><div class="title">Drive Mad</div></div>
-                <div class="item" data-title="escape road"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/escape-road/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/escape.jpeg"></a><div class="title">Escape Road</div></div>
-                <div class="item" data-title="escape road 2"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/escape-road-2/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(39).jpeg"></a><div class="title">Escape Road 2</div></div>
-                <div class="item" data-title="fastkat"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/fastkat/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.jpg"></a><div class="title">FastKat</div></div>
-                <div class="item" data-title="fnaf 1"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/fnaf/fnaf-1/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.26%20AM.png"></a><div class="title">FNaF 1</div></div>
-                <div class="item" data-title="fnaf 2"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/fnaf/fnaf-2/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.42%20AM.png"></a><div class="title">FNaF 2</div></div>
-                <div class="item" data-title="fnaf 3"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/fnaf/fnaf-3/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(38).jpeg"></a><div class="title">FNaF 3</div></div>
-                <div class="item" data-title="fnaf 4"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/fnaf/fnaf-4/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/fnaf4.jpeg"></a><div class="title">FNaF 4</div></div>
-                <div class="item" data-title="geometry dash"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/geometry-dash/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/geometrydash.jpeg"></a><div class="title">Geometry Dash</div></div>
-                <div class="item" data-title="happy wheels"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/happy-wheels/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(40).jpeg"></a><div class="title">Happy Wheels</div></div>
-                <div class="item" data-title="level devil"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/level-devil/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/levil.jpeg"></a><div class="title">Level Devil</div></div>
-                <div class="item" data-title="minecraft"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/minecraft/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(44).jpeg"></a><div class="title">Minecraft</div></div>
-                <div class="item" data-title="monkey mart"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/monkey-mart/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(42).jpeg"></a><div class="title">Monkey Mart</div></div>
-                <div class="item" data-title="plants vs zombies"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/plants/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/plants.jpeg"></a><div class="title">Plants vs Zombies</div></div>
-                <div class="item" data-title="retro bowl"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/retro-bowl/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.png"></a><div class="title">Retro Bowl</div></div>
-                <div class="item" data-title="slope"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/slope/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(4).png"></a><div class="title">Slope</div></div>
-                <div class="item" data-title="slow roads"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/slow-roads/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slow.jpeg"></a><div class="title">Slow Roads</div></div>
-                <div class="item" data-title="snow rider"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/snow-rider/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/SnowRIder.png"></a><div class="title">Snow Rider</div></div>
-                <div class="item" data-title="soccer random"><a href="https://sites.google.com/gse.cusd80.com/titan/gamess/clever-portal/soccer/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soccer.jpeg"></a><div class="title">Soccer Random</div></div>
-                <div class="item" data-title="Space Waves"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/space-waves/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202026-01-19%207.35.51%20PM.png"></a><div class="title">Space Waves</div></div>
-                <div class="item" data-title="stickman climb"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/stickman-climb/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
-                <div class="item" data-title="stickman hook"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/stickman-hook/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
-                <div class="item" data-title="temple run 2"><a href="https://sites.google.com/gse.cusd80.com/titan/games/clever-portal/temple-run/clever-portal" target="_blank"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(45).jpeg"></a><div class="title">Temple Run 2</div></div>
+                <div class="item" data-title="1v1 LOL"><a href="javascript:void(0)" onclick="launchGame('paste here', '1v1 LOL')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">1v1 LOL</div></div>
+                <div class="item" data-title="basket bros"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Basket Bros')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"></a><div class="title">Basket Bros</div></div>
+                <div class="item" data-title="basketball legends"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Basketball Legends')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/legends.jpeg"></a><div class="title">Basketball Legends</div></div>
+                <div class="item" data-title="basket random"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Basket Random')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"></a><div class="title">Basket Random</div></div>
+                <div class="item" data-title="bacon may dye"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Bacon May Dye')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.jpeg"></a><div class="title">Bacon May Dye</div></div>
+                <div class="item" data-title="bacon may dye beta"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Bacon May Dye (BETA)')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"></a><div class="title">Bacon May Dye (BETA)</div></div>
+                <div class="item" data-title="bitlife"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Bitlife')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(36).jpeg"></a><div class="title">Bitlife</div></div>
+                <div class="item" data-title="crazy cattle 3d"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Crazy Cattle 3D')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.jpeg"></a><div class="title">Crazy Cattle 3D</div></div>
+                <div class="item" data-title="drift boss"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Drift Boss')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.27.46%20PM.png"></a><div class="title">Drift Boss</div></div>
+                <div class="item" data-title="drive mad"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Drive Mad')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(35).jpeg"></a><div class="title">Drive Mad</div></div>
+                <div class="item" data-title="escape road"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Escape Road')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/escape.jpeg"></a><div class="title">Escape Road</div></div>
+                <div class="item" data-title="escape road 2"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Escape Road 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(39).jpeg"></a><div class="title">Escape Road 2</div></div>
+                <div class="item" data-title="fastkat"><a href="javascript:void(0)" onclick="launchGame('paste here', 'FastKat')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.jpg"></a><div class="title">FastKat</div></div>
+                <div class="item" data-title="fnaf 1"><a href="javascript:void(0)" onclick="launchGame('paste here', 'FNaF 1')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.26%20AM.png"></a><div class="title">FNaF 1</div></div>
+                <div class="item" data-title="fnaf 2"><a href="javascript:void(0)" onclick="launchGame('paste here', 'FNaF 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.42%20AM.png"></a><div class="title">FNaF 2</div></div>
+                <div class="item" data-title="fnaf 3"><a href="javascript:void(0)" onclick="launchGame('paste here', 'FNaF 3')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(38).jpeg"></a><div class="title">FNaF 3</div></div>
+                <div class="item" data-title="fnaf 4"><a href="javascript:void(0)" onclick="launchGame('paste here', 'FNaF 4')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/fnaf4.jpeg"></a><div class="title">FNaF 4</div></div>
+                <div class="item" data-title="geometry dash"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/geometrydash.html', 'Geometry Dash')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/geometrydash.jpeg"></a><div class="title">Geometry Dash</div></div>
+                <div class="item" data-title="happy wheels"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Happy Wheels')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(40).jpeg"></a><div class="title">Happy Wheels</div></div>
+                <div class="item" data-title="level devil"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Level Devil')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/levil.jpeg"></a><div class="title">Level Devil</div></div>
+                <div class="item" data-title="minecraft"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Minecraft')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(44).jpeg"></a><div class="title">Minecraft</div></div>
+                <div class="item" data-title="monkey mart"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Monkey Mart')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(42).jpeg"></a><div class="title">Monkey Mart</div></div>
+                <div class="item" data-title="plants vs zombies"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Plants vs Zombies')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/plants.jpeg"></a><div class="title">Plants vs Zombies</div></div>
+                <div class="item" data-title="retro bowl"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Retro Bowl')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.png"></a><div class="title">Retro Bowl</div></div>
+                <div class="item" data-title="slope"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Slope')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(4).png"></a><div class="title">Slope</div></div>
+                <div class="item" data-title="slow roads"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Slow Roads')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slow.jpeg"></a><div class="title">Slow Roads</div></div>
+                <div class="item" data-title="snow rider"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Snow Rider')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/SnowRIder.png"></a><div class="title">Snow Rider</div></div>
+                <div class="item" data-title="soccer random"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Soccer Random')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soccer.jpeg"></a><div class="title">Soccer Random</div></div>
+                <div class="item" data-title="Space Waves"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Space Waves')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202026-01-19%207.35.51%20PM.png"></a><div class="title">Space Waves</div></div>
+                <div class="item" data-title="stickman climb"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Stickman Climb')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
+                <div class="item" data-title="stickman hook"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Stickman Hook')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
+                <div class="item" data-title="temple run 2"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Temple Run 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(45).jpeg"></a><div class="title">Temple Run 2</div></div>
             </div>
             <div id="no-results" style="display:none; padding:40px;">No games found.</div>
         </div>
@@ -396,6 +396,87 @@
                 newWin.document.close();
             } else {
                 alert("Pop-up blocked! Please allow pop-ups.");
+            }
+        }
+
+        /* --- NEW: Game Injection Launcher --- */
+        function launchGame(gameUrl, gameTitle) {
+            const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
+            const newWin = window.open('about:blank', '_blank');
+            
+            if (newWin) {
+                const loaderHtml = `
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Clever | Portal</title>
+                        <style>
+                            html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+                            #viewer { width: 100%; height: 100%; border: none; background: white; }
+                            .panic-btn {
+                                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                                font-size: 24px; padding: 18px 50px; color: #000 !important; background: #ff3333;
+                                font-family: 'Arial Black', sans-serif; cursor: pointer; z-index: 99999;
+                                border-radius: 12px; font-weight: 900; border: 4px solid #000;
+                                box-shadow: 0 6px 20px rgba(0,0,0,0.5); transition: all 0.2s ease-in-out;
+                                text-transform: uppercase; letter-spacing: 3px;
+                            }
+                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
+                            #panic-iframe { width: 100%; height: 100%; border: none; }
+                            .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #000 !important; font-weight: bold; z-index: 100001; }
+                        </style>
+                    </head>
+                    <body>
+                        <button class="panic-btn" onclick="doPanic()">PANIC</button>
+                        <iframe id="viewer"></iframe>
+                        <div id="panic-overlay">
+                            <span class="close-panic" onclick="closePanic()">&times;</span>
+                            <iframe id="panic-iframe"></iframe>
+                        </div>
+                        <script>
+                            const githubHTMLUrl = "${gameUrl}";
+                            const PANIC_URL = "${panicUrl}"; 
+                            async function loadGame() {
+                                try {
+                                    const response = await fetch(githubHTMLUrl);
+                                    let html = await response.text();
+                                    const baseUrl = githubHTMLUrl.substring(0, githubHTMLUrl.lastIndexOf("/") + 1);
+                                    html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
+                                    const iframe = document.getElementById("viewer");
+                                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                                    iframeDoc.open();
+                                    iframeDoc.write(html);
+                                    iframeDoc.close();
+                                    iframe.onload = function() {
+                                        try {
+                                            iframe.contentWindow.addEventListener('keydown', (e) => {
+                                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
+                                            });
+                                        } catch (e) { console.log("Hotkey injection limited."); }
+                                    };
+                                } catch (err) { console.error(err); }
+                            }
+                            function doPanic() {
+                                document.getElementById("panic-iframe").src = PANIC_URL;
+                                document.getElementById("panic-overlay").style.display = "block";
+                            }
+                            function closePanic() {
+                                document.getElementById("panic-overlay").style.display = "none";
+                                document.getElementById("panic-iframe").src = "";
+                            }
+                            window.addEventListener('keydown', (e) => {
+                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
+                            });
+                            loadGame();
+                        <\/script>
+                    </body>
+                    </html>
+                `;
+                newWin.document.write(loaderHtml);
+                newWin.document.close();
+            } else {
+                alert("Pop-up blocked! Please allow pop-ups to launch games.");
             }
         }
     </script>
