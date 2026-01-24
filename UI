@@ -231,6 +231,7 @@
                 <div class="item" data-title="stickman climb"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Stickman Climb')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
                 <div class="item" data-title="stickman hook"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/stickmanhook.html', 'Stickman Hook')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
                 <div class="item" data-title="temple run 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/templerun2.htm', 'Temple Run 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(45).jpeg"></a><div class="title">Temple Run 2</div></div>
+                <div class="item" data-title="wheelie bike"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/wheeliebike.html', 'Wheelie Bike')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/images%20(4).png"></a><div class="title">Wheelie Bike</div></div>
             </div>
             <div id="no-results" style="display:none; padding:40px;">No games found.</div>
         </div>
