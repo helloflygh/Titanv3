@@ -11,7 +11,7 @@
     <script>
         (async function autoLoad() {
             // Replace the URL below with your raw.githubusercontent.com link
-            const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/UI';
+            const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
             const container = document.getElementById('content-area');
 
             try {
