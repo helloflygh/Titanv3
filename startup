@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Docs</title> <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: white; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* Tiny invisible trigger in the top right corner */
+        #secret-x {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.01);
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe src="https://www.wikipedia.org"></iframe>
+
+    <div id="secret-x" onclick="launch()"></div>
+
+    <script>
+        async function launch() {
+            // REPLACE THESE LINKS:
+            const htmlSource = "https://raw.githubusercontent.com/USER/REPO/main/index.html";
+            const baseFolder = "https://raw.githack.com/USER/REPO/main/";
+            const faviconUrl = "https://raw.githack.com/USER/REPO/main/favicon.ico";
+            const tabName = "My Secret Site";
+
+            try {
+                const response = await fetch(htmlSource);
+                const code = await response.text();
+                
+                const win = window.open("about:blank", "_blank");
+                if (!win) return;
+
+                // Injecting title, favicon, and the base path for CSS/JS
+                const setup = `
+                    <title>${tabName}</title>
+                    <link rel="icon" href="${faviconUrl}">
+                    <base href="${baseFolder}">
+                `;
+
+                win.document.open();
+                win.document.write(setup + code);
+                win.document.close();
+            } catch (err) {
+                console.error("Fetch failed");
+            }
+        }
+    </script>
+</body>
+</html>
