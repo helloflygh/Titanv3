@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 
+ T!tan v3 UI, to anyone out there feel free to use this :P
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -248,6 +253,9 @@
             <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
             <h1>Proxy Version 1.0</h1>
             <div class="proxy-container">
+            <!--
+            Emojis for future proxy status updates: 🟢🔴
+            -->
                 <p>Proxy Status:🔴</p>
                 <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
                 <br>
