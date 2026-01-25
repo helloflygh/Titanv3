@@ -248,7 +248,7 @@
             <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
             <h1>Proxy Version 1.0</h1>
             <div class="proxy-container">
-                <p>Note: Clicking search will open a cloaked tab.</p>
+                <p>Proxy Status:🔴</p>
                 <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
                 <br>
                 <button class="blank-btn" onclick="launchProxy()">Search</button>
@@ -294,7 +294,7 @@
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "35+ Games!", "Mateooooooooooooooooooooooooo", "dont get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Updates every Monday!!!", "TYSM S4turn <3", "T!tans way - Games for when teachers look away", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
+        const quotes = ["Who actually reads these?", "45+ Games!", "Mateooooooooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Major Updates every Monday!!!", "TYSM S4turn <3", "T!tans way - Games for when teachers look away", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
         let lastQuoteIndex = -1;
 
         function initSite() {
