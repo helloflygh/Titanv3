@@ -175,8 +175,8 @@
             <p> The district blocked T!tan, but as promised, i reposted it. give all your friends the link!</p>
             <h1>How do i know if T!tan gets blocked?</h1>
             <p> I will never make you request acess. if you dont have acess, then the website is blocked.</p>
-            <h1> R.I.P S4turn.</h1>
-            <p> A teacher reported s4turn to the district, leaving s4turn with its UI and code. S4turn is redeveloping its site, to be better then before, and when its finished I will put the link here.</p>
+            <h1> S4turn is Back!!!</h1>
+            <p> S4turn v3 is in its alpha stage, and is still being tested. one its finished, i will put the link here. its so closse! </p>
             <h1> Whats T!tan?</h1>
             <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
             <p> By using T!tan, you agree to our terms of service.</p>
@@ -186,7 +186,7 @@
 
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
-            <a href="https://sites.google.com/gse.cusd80.com/titan/page_3/game-requests" id="req-btn" target="_blank">📃 Request</a>
+            <a href="https://forms.gle/mwpWQFpLSZ5fmkLQ6" id="req-btn" target="_blank">📃 Request</a>
             <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%;"></h1>
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
