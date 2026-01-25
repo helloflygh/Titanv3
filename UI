@@ -187,9 +187,6 @@
             <h1> Whats T!tan?</h1>
             <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
             <p> By using T!tan, you agree to our terms of service.</p>
-        </div>
-        <button class="blank-btn" onclick="openInBlank()">Open in about:blank</button>
-    </div>
 
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
