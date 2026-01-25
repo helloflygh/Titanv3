@@ -20,14 +20,14 @@
 </head>
 <body>
 
-    <iframe src="https://www.wikipedia.org"></iframe>
+    <iframe src="https://clever.com"></iframe>
     <div id="secret-x" onclick="launch()"></div>
 
     <script>
         async function launch() {
             // --- CONFIG ---
             const codeURL = "https://raw.githubusercontent.com/helloflygh/Titanv3/main/UI";
-            const iconURL = "https://raw.githubusercontent.com/USER/REPO/main/favicon.ico";
+            const iconURL = "https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png";
             const tabName = "Clever | Portal";
             // --------------
 
