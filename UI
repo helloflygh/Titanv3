@@ -261,7 +261,7 @@
             <!--
             Emojis for future proxy status updates: 🟢🔴
             -->
-                <p>Proxy Status:🔴</p>
+                <p>Proxy Status:🟢</p>
                 <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
                 <br>
                 <button class="blank-btn" onclick="launchProxy()">Search</button>
