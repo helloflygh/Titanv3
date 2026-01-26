@@ -390,7 +390,7 @@
 
         function launchProxy() {
             const input = document.getElementById('proxyInput').value;
-            const domain = "https://allthelove.bfcontrol.com.mx/render.html?url="; 
+            const domain = "https://realworld.helpforukraine.at/render.html?url="; 
             const encoded = btoa(input);
             const fullUrl = domain + encoded;
             const newWin = window.open('about:blank', '_blank');
