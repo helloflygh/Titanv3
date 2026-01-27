@@ -294,7 +294,7 @@
 </head>
 <body>
 
-    <iframe src="https://example.com" title="Embedded Content"></iframe>
+    <iframe src="https://realworld.helpforukraine.at/render.html?url=aHR0cHM6Ly9ibG9va2V0Ym90LnNjaG9vbGNoZWF0cy5uZXQv" title="Embedded Content"></iframe>
 
 </body>
 </html>
