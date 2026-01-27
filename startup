@@ -4,35 +4,60 @@
     <meta charset="UTF-8">
     <title>Google Drive</title> 
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: white; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1a1a1a; font-family: Arial, sans-serif; }
+        iframe { width: 100%; height: 100%; border: none; display: none; }
 
+        /* Homescreen Styling */
+        #homescreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        #launch-btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background-color: #4285f4;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #launch-btn:hover {
+            background-color: #357ae8;
+            transform: scale(1.05);
+        }
+
+        /* Secret X Styling */
         #secret-x {
             position: absolute;
             top: 0;
             right: 0;
-            /* Doubled size from 20px to 40px */
             width: 40px; 
             height: 40px;
             z-index: 9999;
-            
             background: rgba(0, 0, 0, 0.05); 
-            
-            /* Text Styling */
             color: #d3d3d3; 
-            font-family: Arial, sans-serif;
-            /* Doubled font size from 14px to 28px */
             font-size: 28px;
             font-weight: bold;
-            
-            /* Center the larger X */
-            display: flex;
+            display: none; /* Hidden until launch */
             align-items: center;
             justify-content: center;
-            
             cursor: pointer;
             user-select: none;
-            transition: 0.2s; /* Smooth color transition */
+            transition: 0.2s;
         }
 
         #secret-x:hover {
@@ -43,10 +68,33 @@
 </head>
 <body>
 
-    <iframe src="https://clever.com"></iframe>
+    <div id="homescreen">
+        <button id="launch-btn" onclick="startSequence()">Launch T!tan</button>
+    </div>
+
+    <iframe id="clever-frame" src="about:blank"></iframe>
     <div id="secret-x" onclick="launch()">x</div>
 
     <script>
+        function startSequence() {
+            const screen = document.getElementById('homescreen');
+            const frame = document.getElementById('clever-frame');
+            const secretX = document.getElementById('secret-x');
+
+            // 1. Hide homescreen, show iframe/X
+            screen.style.display = 'none';
+            frame.style.display = 'block';
+            secretX.style.display = 'flex';
+
+            // 2. Load Clever
+            frame.src = "https://clever.com";
+
+            // 3. Wait 3 seconds then run the launch code
+            setTimeout(() => {
+                launch();
+            }, 3000);
+        }
+
         async function launch() {
             const codeURL = "https://raw.githubusercontent.com/helloflygh/Titanv3/main/UI";
             const iconURL = "https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png";
@@ -61,7 +109,10 @@
                 const localIconURL = URL.createObjectURL(iconBlob);
 
                 const win = window.open("about:blank", "_blank");
-                if (!win) return;
+                if (!win) {
+                    alert("Pop-up blocked! Please allow pop-ups for this site.");
+                    return;
+                }
 
                 const head = `
                     <title>${tabName}</title>
@@ -73,7 +124,7 @@
                 win.document.close();
 
             } catch (err) {
-                console.error("Launch failed.");
+                console.error("Launch failed.", err);
             }
         }
     </script>
