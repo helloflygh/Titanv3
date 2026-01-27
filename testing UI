@@ -152,6 +152,7 @@
         <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/T!tan-sidebar-logo.png" class="sidebar-logo" onclick="changeContent('homePage')">
         <div id="mainLinks">
             <div class="menu-item" onclick="changeContent('gamesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/pngimg.com%20-%20gamepad_PNG58.png" class="menu-icon">Games</div>
+            <div class="menu-item" onclick="changeContent('moviesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/movies.png" class="menu-icon">Movies</div>
             <div class="menu-item" onclick="changeContent('soundboardPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soundboard-icon.png" class="menu-icon">Soundboards</div>
             <div class="menu-item" onclick="changeContent('proxiesPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/proxies.png" class="menu-icon">Proxies</div>
             <div class="menu-item" onclick="changeContent('blooketPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
@@ -171,20 +172,17 @@
     <div id="homePage" class="page-content active-page">
         <img src="https://raw.githubusercontent.com/helloflygh/games/main/IMG_3750-removebg-preview.png">
         <div style="background:var(--glass-bg); padding:20px; border-radius:15px; margin:20px; max-width: 600px; width: 90%;">
-            <h2>Version 3.0</h2>
-            <div id="quoteDisplay" class="quote-box">Welcome to T!tan</div>
-            <h1> Whats new? </h1>
-            <p> In the latest update, we: </p>
-            <p> - added 12 new games</p>
-            <p> - fixed all games, and game requests. </p>
-            <p> - note: blooket hacks are down, due to the proxy being down. </p>
-            <p> - added better tab cloaking</p>
-            <h1> R.I.P T!tan.</h1>
-            <p> The district blocked T!tan, but as promised, i reposted it. give all your friends the link!</p>
+            <h2>Version 3.1.1</h2>
+            <div id="quoteDisplay" class="quote-box">Welcome to T!tan! The ultimate class boredom killer.</div>
+            <h1>Proxy and Blooket Hacks are Back!!!</h1>
+            <p> We fixed all games exept crazy cattle 3d</p>
+            <h1> Official Link Doc!!!</h1>
+            <p> If t!tan gets blocked again, the new link will be put on the doc. i will make a button but in the meantime heres the link to the doc (you have to request acess) </p>
+            <p>Doc link:  https://docs.google.com/document/d/1lpijle8OnWQFeJTE_I5FnJ1cEWeeBCl4mH38fOI2AGc/edit?tab=t.0 </p>
             <h1>How do i know if T!tan gets blocked?</h1>
             <p> I will never make you request acess. if you dont have acess, then the website is blocked.</p>
-            <h1> S4turn is Back!!!</h1>
-            <p> S4turn v3 is in its alpha stage, and is still being tested. one its finished, i will put the link here. its so closse! </p>
+            <h1> Oddyssey awareness</h1>
+            <p> S4turn v3 is being developed, but the owner of odyssey found the link, and stole all of s4turns UI ideas.</p>
             <h1> Whats T!tan?</h1>
             <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
             <p> By using T!tan, you agree to our terms of service.</p>
@@ -253,6 +251,15 @@
         </div>
     </div>
 
+ <div id="moviesPage" class="page-content">
+        <div class="full-width-container">
+            <a href="https://forms.gle/mwpWQFpLSZ5fmkLQ6" id="req-btn" target="_blank">📃 Request</a>
+            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%;"></h1>
+            <input type="text" placeholder="Search Movies..." id="search" onkeyup="filterImages()">
+            
+            <div class="grid" id="grid">
+                <div class="item" data-title="Home Alone"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/1v1.lol.html', 'home alone')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">Home Alone</div></div>
+ 
     <div id="proxiesPage" class="page-content">
         <div class="full-width-container">
             <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
@@ -340,7 +347,7 @@
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "50+ Games!", "Mateooooooooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Major Updates every Monday!!!", "TYSM S4turn <3", "T!tans way - Games for when teachers look away", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
+        const quotes = ["Who actually reads these?", "50+ Games!", "Mateooooooooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Major Updates every Monday!!!", "TYSM S4turn <3", "T!tans’s the way—games for when teachers look away 🎩.", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
         let lastQuoteIndex = -1;
 
         function initSite() {
