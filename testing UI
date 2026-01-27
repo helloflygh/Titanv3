@@ -154,7 +154,7 @@
             <div class="menu-item" onclick="changeContent('gamesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/pngimg.com%20-%20gamepad_PNG58.png" class="menu-icon">Games</div>
             <div class="menu-item" onclick="changeContent('soundboardPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soundboard-icon.png" class="menu-icon">Soundboards</div>
             <div class="menu-item" onclick="changeContent('proxiesPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/proxies.png" class="menu-icon">Proxies</div>
-            <div class="menu-item" onclick="window.open('https://sites.google.com/gse.cusd80.com/blooket-hax', '_blank')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
+            <div class="menu-item" onclick="changeContent('blooketPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
             <div class="menu-item" onclick="toggleSettings(true)"><img src="https://raw.githubusercontent.com/helloflygh/games/main/settings-icon.png" class="menu-icon">Settings</div>
         </div>
         <div id="settingsMenu" style="display:none;">
@@ -266,6 +266,39 @@
                 <br>
                 <button class="blank-btn" onclick="launchProxy()">Search</button>
             </div>
+        </div>
+    </div>
+
+  <div id="blooketPage" class="page-content">
+        <div class="full-width-container">
+            <iframe id="soundboard-frame" srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page Iframe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevents double scrollbars */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe src="https://example.com" title="Embedded Content"></iframe>
+
+</body>
+</html>
+            '></iframe>
         </div>
     </div>
 
