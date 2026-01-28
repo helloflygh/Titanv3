@@ -173,8 +173,8 @@
         <div style="background:var(--glass-bg); padding:20px; border-radius:15px; margin:20px; max-width: 600px; width: 90%;">
             <h2>Version 3.1.1</h2>
             <div id="quoteDisplay" class="quote-box">Welcome to T!tan! The ultimate class boredom killer.</div>
-            <h1>Proxy and Blooket Hacks Down</h1>
-            <p> We fixed all games exept crazy cattle 3d</p>
+            <h1>Proxy and Blooket Hacks are Back!!!</h1>
+            <p> if the proxy goes down please be patient!!! </p>
             <h1> Official Link Doc!!!</h1>
             <p> If t!tan gets blocked again, the new link will be put on the doc. i will make a button but in the meantime heres the link to the doc (you have to request acess) </p>
             <p>Doc link:  https://docs.google.com/document/d/1lpijle8OnWQFeJTE_I5FnJ1cEWeeBCl4mH38fOI2AGc/edit?tab=t.0 </p>
@@ -258,7 +258,7 @@
             <!--
             Emojis for future proxy status updates: 🟢🔴
             -->
-                <p>Proxy Status:🔴</p>
+                <p>Proxy Status:🟢</p>
                 <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
                 <br>
                 <button class="blank-btn" onclick="launchProxy()">Search</button>
