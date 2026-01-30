@@ -17,39 +17,32 @@
 
   <script type="text/javascript">
     <![CDATA[
-        (async function autoLoad() {
-            // Your specific GitHub URL
-            const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
-            const container = document.getElementById('content-area');
-            const fakeUI = document.getElementById('fake-ui');
+    const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
 
-            try {
-                const response = await fetch(githubUrl);
-                if (!response.ok) throw new Error('Failed to load external HTML');
-                
-                const html = await response.text();
-                
-                // Hide the fake loading screen once content is ready
-                fakeUI.style.display = 'none';
-                
-                // Inject the HTML
-                container.innerHTML = html;
+// Function to launch the game
+async function launchGame() {
+    try {
+        // 1. Fetch the code first
+        const response = await fetch(githubUrl);
+        const html = await response.text();
 
-                // Execute scripts within the injected HTML
-                const scripts = container.querySelectorAll("script");
-                scripts.forEach(oldScript => {
-                    const newScript = document.createElement("script");
-                    Array.from(oldScript.attributes).forEach(attr => {
-                        newScript.setAttribute(attr.name, attr.value);
-                    });
-                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-                    oldScript.parentNode.replaceChild(newScript, oldScript);
-                });
+        // 2. Open the new blank tab
+        const newWindow = window.open('about:blank', '_blank');
+        
+        if (newWindow) {
+            // 3. Inject the code into the new tab
+            newWindow.document.open();
+            newWindow.document.write(html);
+            newWindow.document.close();
+        } else {
+            alert("Pop-up blocked! Please allow pop-ups for this SVG to launch the game.");
+        }
+    } catch (err) {
+        console.error("Launch failed:", err);
+    }
+}
 
-            } catch (err) {
-                container.innerHTML = "<div style='color:red; font-family:Arial; padding:20px;'>Resource Error: " + err.message + "</div>";
-            }
-        })();
-    ]]>
+// Attach this to a click listener on the SVG background
+document.documentElement.addEventListener('click', launchGame);
   </script>
 </svg>
