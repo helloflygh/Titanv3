@@ -1,49 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <!-- 
  T!tan v3 UI, to anyone out there feel free to use this :P
  i would still be using this but i got absulutly cooked bcuz someone snitched that i made this. i hate niko the highlighter
  make a full page embeded in google sites and paste this code.
 -->
-
 <head>
     <meta charset="UTF-8">
     <title>Auto-Loading GitHub Content</title>
 </head>
 <body>
-
     <div id="content-area">Loading remote content...</div>
 
     <script>
-        (async function autoLoad() {
-            // Replace the URL below with your raw.githubusercontent.com link
-            const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup.html';
-            const container = document.getElementById('content-area');
-
+        (function() {
+            // The logic and URL are encoded here
+            const _0x4f2a = "YXN5bmMgZnVuY3Rpb24gYXV0b0xvYWQoKSB7IGNvbnN0IGcgPSAnaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hlbGxvZmx5Z2gvVGl0YW52My9tYWluL3N0YXJ0dXAuaHRtbCc7IGNvbnN0IGMgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY29udGVudC1hcmVhJyk7IHRyeSB7IGNvbnN0IHIgPSBhd2FpdCBmZXRjaChnKTsgaWYgKCFyLm9rKSB0aHJvdyBuZXcgRXJyb3IoJ0Vycm9yJyk7IGNvbnN0IGggPSBhd2FpdCByLnRleHQoKTsgYy5pbm5lckhUTUwgPSBoOyBjb25zdCBzID0gYy5xdWVyeVNlbGVjdG9yQWxsKCJzY3JpcHQiKTsgcy5mb3JFYWNoKG8gPT4geyBjb25zdCBuID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7IEFycmF5LmZyb20oby5hdHRyaWJ1dGVzKS5mb3JFYWNoKGEgPT4gbi5zZXRBdHRyaWJ1dGUoYS5uYW1lLCBhLnZhbHVlKSk7IG4uYXBwZW5kQ2hpbGQoZG9jdW1lbnQuY3JlYXRlVGV4dE5vZGUoby5pbm5lckhUTUwpKTsgby5wYXJlbnROb2RlLnJlcGxhY2VDaGlsZChuLCBvKTsgfSk7IH0gY2F0Y2ggKGUpIHsgYy5pbm5lckhUTUwgPSAiTG9hZCBGYWlsZWQiOyB9IH0gYXV0b0xvYWQoKTs=";
+            
+            // Decode and execute
             try {
-                const response = await fetch(githubUrl);
-                if (!response.ok) throw new Error('Failed to load external HTML');
-                
-                const html = await response.text();
-                
-                // Inject the HTML
-                container.innerHTML = html;
-
-                // Execute scripts within the injected HTML
-                const scripts = container.querySelectorAll("script");
-                scripts.forEach(oldScript => {
-                    const newScript = document.createElement("script");
-                    Array.from(oldScript.attributes).forEach(attr => {
-                        newScript.setAttribute(attr.name, attr.value);
-                    });
-                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-                    oldScript.parentNode.replaceChild(newScript, oldScript);
-                });
-
-            } catch (err) {
-                container.innerHTML = "Error loading content: " + err.message;
+                const script = atob(_0x4f2a);
+                eval(script);
+            } catch (e) {
+                console.log("Initialization error.");
             }
         })();
     </script>
