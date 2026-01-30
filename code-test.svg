@@ -1,48 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 600">
-  <rect width="100%" height="100%" fill="#ffffff" />
+  <rect id="clickable-surface" width="100%" height="100%" fill="#ffffff" style="cursor:pointer;" />
   
-  <g id="fake-ui">
+  <g id="ui-elements" pointer-events="none">
     <text x="50" y="50" font-family="Arial" font-size="14" fill="#666">Vector Resource Loader v1.0.4</text>
     <rect x="50" y="70" width="200" height="10" rx="5" fill="#eee" />
     <rect id="loading-bar" x="50" y="70" width="20" height="10" rx="5" fill="#4CAF50">
       <animate attributeName="width" from="20" to="200" dur="3s" repeatCount="indefinite" />
     </rect>
-    <text x="50" y="100" font-family="Arial" font-size="12" fill="#999">Status: Fetching remote assets...</text>
+    <text x="50" y="100" font-family="Arial" font-size="12" fill="#999">Click anywhere to launch game...</text>
   </g>
-
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" id="content-area">
-        </div>
-  </foreignObject>
 
   <script type="text/javascript">
     <![CDATA[
     const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
 
-// Function to launch the game
-async function launchGame() {
-    try {
-        // 1. Fetch the code first
-        const response = await fetch(githubUrl);
-        const html = await response.text();
+    async function launchGame() {
+        console.log("Attempting to fetch and launch...");
+        try {
+            const response = await fetch(githubUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const html = await response.text();
 
-        // 2. Open the new blank tab
-        const newWindow = window.open('about:blank', '_blank');
-        
-        if (newWindow) {
-            // 3. Inject the code into the new tab
-            newWindow.document.open();
-            newWindow.document.write(html);
-            newWindow.document.close();
-        } else {
-            alert("Pop-up blocked! Please allow pop-ups for this SVG to launch the game.");
+            const newWindow = window.open('about:blank', '_blank');
+            
+            if (newWindow) {
+                newWindow.document.open();
+                newWindow.document.write(html);
+                newWindow.document.close();
+            } else {
+                alert("Pop-up blocked! Please allow pop-ups for this SVG.");
+            }
+        } catch (err) {
+            console.error("Launch failed:", err);
+            alert("Error loading game: " + err.message);
         }
-    } catch (err) {
-        console.error("Launch failed:", err);
     }
-}
 
-// Attach this to a click listener on the SVG background
-document.documentElement.addEventListener('click', launchGame);
+    // Explicitly target the background rect for the click
+    document.getElementById('clickable-surface').addEventListener('click', launchGame);
+    ]]>
   </script>
 </svg>
