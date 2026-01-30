@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 600">
-  <rect id="clickable-surface" width="100%" height="100%" fill="#ffffff" style="cursor:pointer;" />
+  <rect id="launcher-bg" width="100%" height="100%" fill="#ffffff" style="cursor:pointer;" />
   
-  <g id="ui-elements" pointer-events="none">
+  <g id="ui" pointer-events="none">
     <text x="50" y="50" font-family="Arial" font-size="14" fill="#666">Vector Resource Loader v1.0.4</text>
     <rect x="50" y="70" width="200" height="10" rx="5" fill="#eee" />
     <rect id="loading-bar" x="50" y="70" width="20" height="10" rx="5" fill="#4CAF50">
       <animate attributeName="width" from="20" to="200" dur="3s" repeatCount="indefinite" />
     </rect>
-    <text x="50" y="100" font-family="Arial" font-size="12" fill="#999">Click anywhere to launch game...</text>
+    <text x="50" y="100" font-family="Arial" font-size="12" fill="#333" font-weight="bold">Ready. Click anywhere to launch game.</text>
   </g>
 
   <script type="text/javascript">
@@ -15,10 +15,9 @@
     const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
 
     async function launchGame() {
-        console.log("Attempting to fetch and launch...");
         try {
             const response = await fetch(githubUrl);
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!response.ok) throw new Error('Fetch failed');
             const html = await response.text();
 
             const newWindow = window.open('about:blank', '_blank');
@@ -28,16 +27,14 @@
                 newWindow.document.write(html);
                 newWindow.document.close();
             } else {
-                alert("Pop-up blocked! Please allow pop-ups for this SVG.");
+                alert("Pop-up blocked! Please click 'Allow' in the address bar.");
             }
         } catch (err) {
-            console.error("Launch failed:", err);
-            alert("Error loading game: " + err.message);
+            alert("Error: " + err.message);
         }
     }
 
-    // Explicitly target the background rect for the click
-    document.getElementById('clickable-surface').addEventListener('click', launchGame);
+    document.getElementById('launcher-bg').addEventListener('click', launchGame);
     ]]>
   </script>
 </svg>
