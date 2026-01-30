@@ -11,41 +11,36 @@
   </g>
 
   <script type="text/javascript">
-    <![CDATA[
+    // <![CDATA[
     const githubUrl = 'https://raw.githubusercontent.com/helloflygh/Titanv3/main/startup';
 
-    async function launchGame(e) {
-        // Prevent default behavior to ensure the event is handled
-        if (e) e.preventDefault();
-        
+    async function launchGame() {
+        // 1. Open window immediately to satisfy pop-up blockers
+        const newWindow = window.open('', '_blank');
+        if (!newWindow) {
+            alert("Pop-up blocked! Please allow pop-ups for this site.");
+            return;
+        }
+
+        newWindow.document.write('Loading game resources...');
+
         try {
+            // 2. Fetch the content
             const response = await fetch(githubUrl);
             if (!response.ok) throw new Error('Fetch failed (CORS or 404)');
             const html = await response.text();
 
-            const newWindow = window.open('about:blank', '_blank');
-            
-            if (newWindow) {
-                newWindow.document.open();
-                newWindow.document.write(html);
-                newWindow.document.close();
-            } else {
-                alert("Pop-up blocked! Please allow pop-ups for this site.");
-            }
+            // 3. Inject content into the already-open window
+            newWindow.document.open();
+            newWindow.document.write(html);
+            newWindow.document.close();
         } catch (err) {
-            console.error(err);
-            alert("Error: " + err.message + "\nNote: GitHub Raw content may be blocked by CORS if not accessed via a proxy.");
+            newWindow.close();
+            alert("Error: " + err.message);
         }
     }
 
-    // Attach listener after DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-        const bg = document.getElementById('launcher-bg');
-        bg.addEventListener('click', launchGame);
-    });
-    
-    // Fallback if DOMContentLoaded already fired
     document.getElementById('launcher-bg').addEventListener('click', launchGame);
-    ]]>
+    // ]]>
   </script>
 </svg>
