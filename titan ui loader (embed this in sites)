@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- 
- T!tan v3 UI, to anyone out there feel free to use this :P
- i would still be using this but i got absulutly cooked bcuz lightspeed did an update. i hate lightspeed
- make a full page embeded in google sites and paste this code.
--->
-
 <head>
     <meta charset="UTF-8">
-    <title>Auto-Loading GitHub Content</title>
+    <title>Clever | Portal</title>
+    
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png">
 </head>
 <body>
 
