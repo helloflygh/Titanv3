@@ -13,7 +13,7 @@
             const redirectURL = "https://classroom.google.com";
 
             try {
-                // 1. Fetch the raw GitHub code and favicon simultaneously
+                // 1. Fetch data
                 const [htmlRes, iconRes] = await Promise.all([
                     fetch(codeURL),
                     fetch(iconURL)
@@ -23,23 +23,37 @@
                 const iconBlob = await iconRes.blob();
                 const localIconURL = URL.createObjectURL(iconBlob);
 
-                // 2. Open the about:blank tab
+                // 2. Open the tab
                 const win = window.open("about:blank", "_blank");
                 
                 if (win) {
-                    // 3. Inject the code into the new tab
-                    const head = `
-                        <title>${tabName}</title>
-                        <link rel="icon" type="image/x-icon" href="${localIconURL}">
+                    // 3. Construct the document
+                    // We include a script inside the new tab to "force" the favicon to stay
+                    const content = `
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>${tabName}</title>
+                            <link id="favicon" rel="icon" type="image/x-icon" href="${localIconURL}">
+                        </head>
+                        <body>
+                            ${html}
+                            <script>
+                                // Force refresh the favicon for about:blank
+                                const link = document.getElementById('favicon');
+                                link.href = "${localIconURL}";
+                            <\/script>
+                        </body>
+                        </html>
                     `;
+
                     win.document.open();
-                    win.document.write(head + html);
+                    win.document.write(content);
                     win.document.close();
 
-                    // 4. Redirect the original tab to Google Classroom
+                    // 4. Redirect the original tab
                     window.location.href = redirectURL;
                 } else {
-                    // Fallback if pop-ups are blocked
                     alert("Please allow pop-ups for this site to function.");
                 }
 
