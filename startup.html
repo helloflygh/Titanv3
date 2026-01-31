@@ -2,131 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Google Drive</title> 
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1a1a1a; font-family: Arial, sans-serif; }
-        iframe { width: 100%; height: 100%; border: none; display: none; }
-
-        /* Homescreen Styling */
-        #homescreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
-
-        #launch-btn {
-            padding: 15px 40px;
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            background-color: #4285f4;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        #launch-btn:hover {
-            background-color: #357ae8;
-            transform: scale(1.05);
-        }
-
-        /* Secret X Styling */
-        #secret-x {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40px; 
-            height: 40px;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.05); 
-            color: #d3d3d3; 
-            font-size: 28px;
-            font-weight: bold;
-            display: none; /* Hidden until launch */
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            user-select: none;
-            transition: 0.2s;
-        }
-
-        #secret-x:hover {
-            background: rgba(0, 0, 0, 0.15);
-            color: #888888;
-        }
-    </style>
+    <title>Google Drive</title>
 </head>
-<body>
-
-    <div id="homescreen">
-        <button id="launch-btn" onclick="startSequence()">Launch T!tan</button>
-    </div>
-
-    <iframe id="clever-frame" src="about:blank"></iframe>
-    <div id="secret-x" onclick="launch()">x</div>
-
+<body style="background: #ffffff;">
     <script>
-        function startSequence() {
-            const screen = document.getElementById('homescreen');
-            const frame = document.getElementById('clever-frame');
-            const secretX = document.getElementById('secret-x');
-
-            // 1. Hide homescreen, show iframe/X
-            screen.style.display = 'none';
-            frame.style.display = 'block';
-            secretX.style.display = 'flex';
-
-            // 2. Load Clever
-            frame.src = "https://clever.com";
-
-            // 3. Wait 3 seconds then run the launch code
-            setTimeout(() => {
-                launch();
-            }, 3000);
-        }
-
-        async function launch() {
+        (async function autoLaunch() {
             const codeURL = "https://raw.githubusercontent.com/helloflygh/Titanv3/main/UI.html";
             const iconURL = "https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png";
             const tabName = "Clever | Portal";
+            const redirectURL = "https://classroom.google.com";
 
             try {
-                const htmlRes = await fetch(codeURL);
-                const html = await htmlRes.text();
+                // 1. Fetch the raw GitHub code and favicon simultaneously
+                const [htmlRes, iconRes] = await Promise.all([
+                    fetch(codeURL),
+                    fetch(iconURL)
+                ]);
 
-                const iconRes = await fetch(iconURL);
+                const html = await htmlRes.text();
                 const iconBlob = await iconRes.blob();
                 const localIconURL = URL.createObjectURL(iconBlob);
 
+                // 2. Open the about:blank tab
                 const win = window.open("about:blank", "_blank");
-                if (!win) {
-                    alert("Pop-up blocked! Please allow pop-ups for this site.");
-                    return;
+                
+                if (win) {
+                    // 3. Inject the code into the new tab
+                    const head = `
+                        <title>${tabName}</title>
+                        <link rel="icon" type="image/x-icon" href="${localIconURL}">
+                    `;
+                    win.document.open();
+                    win.document.write(head + html);
+                    win.document.close();
+
+                    // 4. Redirect the original tab to Google Classroom
+                    window.location.href = redirectURL;
+                } else {
+                    // Fallback if pop-ups are blocked
+                    alert("Please allow pop-ups for this site to function.");
                 }
 
-                const head = `
-                    <title>${tabName}</title>
-                    <link rel="icon" type="image/x-icon" href="${localIconURL}">
-                `;
-
-                win.document.open();
-                win.document.write(head + html);
-                win.document.close();
-
             } catch (err) {
-                console.error("Launch failed.", err);
+                console.error("Auto-launch failed:", err);
             }
-        }
+        })();
     </script>
 </body>
 </html>
