@@ -3,8 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Google Drive</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* The prompt container */
+        #popup-instruction {
+            display: none; /* Hidden by default */
+            text-align: center;
+        }
+
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* The pointing arrow */
+        .arrow {
+            position: fixed;
+            top: 20px;
+            right: 50px;
+            font-size: 60px;
+            color: #d93025; /* Warning Red */
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-45deg); }
+            50% { transform: translateY(15px) rotate(-45deg); }
+        }
+    </style>
 </head>
-<body style="background: #ffffff;">
+<body>
+
+    <div id="popup-instruction">
+        <div class="arrow">↗</div>
+        <div class="message">Please Allow Pop-ups</div>
+        <p>Click the icon in the address bar to allow pop-ups and redirect.</p>
+    </div>
+
     <script>
         (async function autoLaunch() {
             const codeURL = "https://raw.githubusercontent.com/helloflygh/Titanv3/main/UI.html";
@@ -12,53 +59,64 @@
             const tabName = "Clever | Portal";
             const redirectURL = "https://classroom.google.com";
 
-            try {
-                // 1. Fetch data
-                const [htmlRes, iconRes] = await Promise.all([
-                    fetch(codeURL),
-                    fetch(iconURL)
-                ]);
+            async function attemptOpen() {
+                try {
+                    const [htmlRes, iconRes] = await Promise.all([
+                        fetch(codeURL),
+                        fetch(iconURL)
+                    ]);
 
-                const html = await htmlRes.text();
-                const iconBlob = await iconRes.blob();
-                const localIconURL = URL.createObjectURL(iconBlob);
+                    const html = await htmlRes.text();
+                    const iconBlob = await iconRes.blob();
+                    const localIconURL = URL.createObjectURL(iconBlob);
 
-                // 2. Open the tab
-                const win = window.open("about:blank", "_blank");
-                
-                if (win) {
-                    // 3. Construct the document
-                    // We include a script inside the new tab to "force" the favicon to stay
-                    const content = `
-                        <!DOCTYPE html>
-                        <html>
-                        <head>
-                            <title>${tabName}</title>
-                            <link id="favicon" rel="icon" type="image/x-icon" href="${localIconURL}">
-                        </head>
-                        <body>
-                            ${html}
-                            <script>
-                                // Force refresh the favicon for about:blank
-                                const link = document.getElementById('favicon');
-                                link.href = "${localIconURL}";
-                            <\/script>
-                        </body>
-                        </html>
-                    `;
+                    const win = window.open("about:blank", "_blank");
 
-                    win.document.open();
-                    win.document.write(content);
-                    win.document.close();
+                    if (win) {
+                        const content = `
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <title>${tabName}</title>
+                                <link id="favicon" rel="icon" type="image/x-icon" href="${localIconURL}">
+                            </head>
+                            <body>
+                                ${html}
+                                <script>
+                                    const link = document.getElementById('favicon');
+                                    link.href = "${localIconURL}";
+                                <\/script>
+                            </body>
+                            </html>
+                        `;
 
-                    // 4. Redirect the original tab
-                    window.location.href = redirectURL;
-                } else {
-                    alert("Please allow pop-ups for this site to function.");
+                        win.document.open();
+                        win.document.write(content);
+                        win.document.close();
+
+                        window.location.href = redirectURL;
+                        return true; // Success
+                    } else {
+                        // Show the instruction UI if blocked
+                        document.getElementById('popup-instruction').style.display = 'block';
+                        return false; // Blocked
+                    }
+                } catch (err) {
+                    console.error("Auto-launch failed:", err);
+                    return true; // Stop loop on error
                 }
+            }
 
-            } catch (err) {
-                console.error("Auto-launch failed:", err);
+            // Initial attempt
+            let opened = await attemptOpen();
+
+            // If blocked, keep checking every 2 seconds so it auto-launches 
+            // the moment they click "Always Allow"
+            if (!opened) {
+                const checkInterval = setInterval(async () => {
+                    let retry = await attemptOpen();
+                    if (retry) clearInterval(checkInterval);
+                }, 2000);
             }
         })();
     </script>
