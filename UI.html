@@ -425,127 +425,120 @@
             }
         }
 
-        function launchProxy() {
-            const input = document.getElementById('proxyInput').value;
-            const domain = "https://realworld.helpforukraine.at/render.html?url="; 
-            const encoded = btoa(input);
-            const fullUrl = domain + encoded;
-            const newWin = window.open('about:blank', '_blank');
-            if (newWin) {
-                newWin.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Clever | Portal</title>
-                        <style>
-                            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-                            #top-bar { width: 100%; display: flex; justify-content: center; position: absolute; top: 20px; left: 0; z-index: 9999; pointer-events: none; }
-                            .panic-btn { pointer-events: auto; font-size: 18px; padding: 10px 40px; color: #000; background: #ff3333; font-family: 'Arial Black', sans-serif; cursor: pointer; border-radius: 8px; font-weight: 900; border: 3px solid #000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); text-transform: uppercase; transition: transform 0.1s; }
-                            #main-game-iframe { width: 100%; height: 100%; border: none; }
-                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 1000000; }
-                            #panic-iframe { width: 100%; height: 100%; border: none; }
-                            .close-panic { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-family: Arial, sans-serif; color: #ccc; font-weight: bold; z-index: 1000001; user-select: none; }
-                        </style>
-                    </head>
-                    <body>
-                        <div id="top-bar"><button class="panic-btn" onclick="doPanic()">PANIC</button></div>
-                        <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
-                        <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">×</span><iframe id="panic-iframe"></iframe></div>
-                        <script>
-                            const PANIC_URL = "https://clever.com"; 
-                            function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
-                            function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
-                            window.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'x') { doPanic(); } });
-                        <\/script>
-                    </body>
-                    </html>
-                `);
-                newWin.document.close();
-            } else {
-                alert("Pop-up blocked! Please allow pop-ups.");
-            }
-        }
+      function launchProxy() {
+    const input = document.getElementById('proxyInput').value;
+    const domain = "https://realworld.helpforukraine.at/render.html?url="; 
+    const encoded = btoa(input);
+    const fullUrl = domain + encoded;
+    const newWin = window.open('about:blank', '_blank');
+    if (newWin) {
+        newWin.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Clever | Portal</title>
+                <style>
+                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
+                    /* Matches Homepage Button Style */
+                    .panic-btn {
+                        position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                        font-size: 16px; cursor: pointer; z-index: 25000;
+                        background: #ff4b4b; padding: 10px 25px; border-radius: 8px;
+                        font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                        transition: transform 0.2s; color: #000;
+                    }
+                    .panic-btn:hover { transform: translateX(-50%) scale(1.05); }
+                    #main-game-iframe { width: 100%; height: 100%; border: none; }
+                    #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 1000000; }
+                    #panic-iframe { width: 100%; height: 100%; border: none; }
+                    .close-panic { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #000; font-weight: bold; z-index: 1000001; }
+                </style>
+            </head>
+            <body>
+                <button class="panic-btn" onclick="doPanic()">PANIC</button>
+                <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
+                <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">×</span><iframe id="panic-iframe"></iframe></div>
+                <script>
+                    const PANIC_URL = "https://clever.com"; 
+                    function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
+                    function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
+                <\/script>
+            </body>
+            </html>
+        `);
+        newWin.document.close();
+    }
+}
 
         /* --- NEW: Game Injection Launcher --- */
-        function launchGame(gameUrl, gameTitle) {
-            const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
-            const newWin = window.open('about:blank', '_blank');
-            
-            if (newWin) {
-                const loaderHtml = `
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Clever | Portal</title>
-                        <style>
-                            html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
-                            #viewer { width: 100%; height: 100%; border: none; background: white; }
-                            .panic-btn {
-                                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                                font-size: 24px; padding: 18px 50px; color: #000 !important; background: #ff3333;
-                                font-family: 'Arial Black', sans-serif; cursor: pointer; z-index: 99999;
-                                border-radius: 12px; font-weight: 900; border: 4px solid #000;
-                                box-shadow: 0 6px 20px rgba(0,0,0,0.5); transition: all 0.2s ease-in-out;
-                                text-transform: uppercase; letter-spacing: 3px;
-                            }
-                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
-                            #panic-iframe { width: 100%; height: 100%; border: none; }
-                            .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #000 !important; font-weight: bold; z-index: 100001; }
-                        </style>
-                    </head>
-                    <body>
-                        <button class="panic-btn" onclick="doPanic()">PANIC</button>
-                        <iframe id="viewer"></iframe>
-                        <div id="panic-overlay">
-                            <span class="close-panic" onclick="closePanic()">&times;</span>
-                            <iframe id="panic-iframe"></iframe>
-                        </div>
-                        <script>
-                            const githubHTMLUrl = "${gameUrl}";
-                            const PANIC_URL = "${panicUrl}"; 
-                            async function loadGame() {
-                                try {
-                                    const response = await fetch(githubHTMLUrl);
-                                    let html = await response.text();
-                                    const baseUrl = githubHTMLUrl.substring(0, githubHTMLUrl.lastIndexOf("/") + 1);
-                                    html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
-                                    const iframe = document.getElementById("viewer");
-                                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                                    iframeDoc.open();
-                                    iframeDoc.write(html);
-                                    iframeDoc.close();
-                                    iframe.onload = function() {
-                                        try {
-                                            iframe.contentWindow.addEventListener('keydown', (e) => {
-                                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
-                                            });
-                                        } catch (e) { console.log("Hotkey injection limited."); }
-                                    };
-                                } catch (err) { console.error(err); }
-                            }
-                            function doPanic() {
-                                document.getElementById("panic-iframe").src = PANIC_URL;
-                                document.getElementById("panic-overlay").style.display = "block";
-                            }
-                            function closePanic() {
-                                document.getElementById("panic-overlay").style.display = "none";
-                                document.getElementById("panic-iframe").src = "";
-                            }
-                            window.addEventListener('keydown', (e) => {
-                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
-                            });
-                            loadGame();
-                        <\/script>
-                    </body>
-                    </html>
-                `;
-                newWin.document.write(loaderHtml);
-                newWin.document.close();
-            } else {
-                alert("Pop-up blocked! Please allow pop-ups to launch games.");
-            }
-        }
+  function launchGame(gameUrl, gameTitle) {
+    const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
+    const newWin = window.open('about:blank', '_blank');
+    
+    if (newWin) {
+        const loaderHtml = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Clever | Portal</title>
+                <style>
+                    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
+                    #viewer { width: 100%; height: 100%; border: none; background: white; }
+                    /* Matches Homepage Button Style */
+                    .panic-btn {
+                        position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                        font-size: 16px; cursor: pointer; z-index: 99999;
+                        background: #ff4b4b; padding: 10px 25px; border-radius: 8px;
+                        font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                        transition: transform 0.2s; color: #000;
+                    }
+                    .panic-btn:hover { transform: translateX(-50%) scale(1.05); }
+                    #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
+                    #panic-iframe { width: 100%; height: 100%; border: none; }
+                    .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #000; font-weight: bold; z-index: 100001; }
+                </style>
+            </head>
+            <body>
+                <button class="panic-btn" onclick="doPanic()">PANIC</button>
+                <iframe id="viewer"></iframe>
+                <div id="panic-overlay">
+                    <span class="close-panic" onclick="closePanic()">&times;</span>
+                    <iframe id="panic-iframe"></iframe>
+                </div>
+                <script>
+                    const githubHTMLUrl = "${gameUrl}";
+                    const PANIC_URL = "${panicUrl}"; 
+                    async function loadGame() {
+                        try {
+                            const response = await fetch(githubHTMLUrl);
+                            let html = await response.text();
+                            const baseUrl = githubHTMLUrl.substring(0, githubHTMLUrl.lastIndexOf("/") + 1);
+                            html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
+                            const iframe = document.getElementById("viewer");
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            iframeDoc.open();
+                            iframeDoc.write(html);
+                            iframeDoc.close();
+                        } catch (err) { console.error(err); }
+                    }
+                    function doPanic() {
+                        document.getElementById("panic-iframe").src = PANIC_URL;
+                        document.getElementById("panic-overlay").style.display = "block";
+                    }
+                    function closePanic() {
+                        document.getElementById("panic-overlay").style.display = "none";
+                        document.getElementById("panic-iframe").src = "";
+                    }
+                    loadGame();
+                <\/script>
+            </body>
+            </html>
+        `;
+        newWin.document.write(loaderHtml);
+        newWin.document.close();
+    }
+}
     </script>
 </body>
 </html>
