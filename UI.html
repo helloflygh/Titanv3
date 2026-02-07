@@ -353,7 +353,7 @@
             window.open(fullUrl, '_blank');
         }
 
-        // FETCH CODE LAUNCHER (Restored logic)
+       // FETCH CODE LAUNCHER (Restored logic)
         function launchGame(gameUrl) {
             const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
             const newWin = window.open('about:blank', '_blank');
@@ -363,12 +363,13 @@
                     <html>
                     <head>
                         <title>Clever | Portal</title>
+                        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png">
                         <style>
                             html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
                             #viewer { width: 100%; height: 100%; border: none; background: #fff; }
                             #panic-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; z-index: 99999; }
                             .panic-btn { font-size: 16px; cursor: pointer; background: #ff4b4b; padding: 10px 25px; border-radius: 8px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-                            .drag-handle { cursor: grab; background: rgba(255, 255, 255, 0.6); padding: 10px 8px; border-radius: 8px; font-size: 16px; }
+                            .drag-handle { cursor: grab; background: rgba(255, 255, 255, 0.6); padding: 10px 8px; border-radius: 8px; font-size: 16px; user-select: none; }
                             #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
                             #panic-iframe { width: 100%; height: 100%; border: none; }
                             .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; font-weight: bold; }
@@ -383,24 +384,48 @@
                         <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
                         <script>
                             async function loadGame() {
-                                const response = await fetch("${gameUrl}");
-                                let html = await response.text();
-                                const baseUrl = "${gameUrl}".substring(0, "${gameUrl}".lastIndexOf("/") + 1);
-                                html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
-                                const doc = document.getElementById("viewer").contentDocument;
-                                doc.open(); doc.write(html); doc.close();
+                                try {
+                                    const response = await fetch("${gameUrl}");
+                                    let html = await response.text();
+                                    const baseUrl = "${gameUrl}".substring(0, "${gameUrl}".lastIndexOf("/") + 1);
+                                    html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
+                                    const doc = document.getElementById("viewer").contentDocument;
+                                    doc.open(); doc.write(html); doc.close();
+                                } catch (e) { console.error("Failed to load game:", e); }
                             }
+                            
                             function doPanic() { document.getElementById("panic-iframe").src = "${panicUrl}"; document.getElementById("panic-overlay").style.display = "block"; }
                             function closePanic() { document.getElementById("panic-overlay").style.display = "none"; }
+                            
                             loadGame();
 
-                            // Restored Drag Logic
+                            // Improved Drag Logic
                             const container = document.getElementById("panic-container");
                             const handle = document.getElementById("dragHandle");
-                            let isDragging = false, offX, offY;
-                            handle.onmousedown = (e) => { isDragging = true; offX = e.clientX - container.offsetLeft; offY = e.clientY - container.offsetTop; };
-                            document.onmousemove = (e) => { if (!isDragging) return; container.style.left = (e.clientX - offX) + "px"; container.style.top = (e.clientY - offY) + "px"; container.style.transform = "none"; };
-                            document.onmouseup = () => isDragging = false;
+                            let isDragging = false;
+                            let offX, offY;
+
+                            handle.addEventListener('mousedown', (e) => {
+                                isDragging = true;
+                                const rect = container.getBoundingClientRect();
+                                offX = e.clientX - rect.left;
+                                offY = e.clientY - rect.top;
+                                handle.style.cursor = 'grabbing';
+                            });
+
+                            window.addEventListener('mousemove', (e) => {
+                                if (!isDragging) return;
+                                e.preventDefault();
+                                container.style.left = (e.clientX - offX) + "px";
+                                container.style.top = (e.clientY - offY) + "px";
+                                container.style.transform = "none";
+                                container.style.margin = "0";
+                            });
+
+                            window.addEventListener('mouseup', () => {
+                                isDragging = false;
+                                handle.style.cursor = 'grab';
+                            });
                         <\/script>
                     </body>
                     </html>`;
@@ -408,7 +433,7 @@
                 newWin.document.close();
             }
         }
-
+        
         function setupDraggable(container, handle) {
             let isDragging = false, offsetX, offsetY;
             handle.onmousedown = (e) => {
