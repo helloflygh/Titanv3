@@ -70,16 +70,45 @@
             font-size: 30px; cursor: pointer; z-index: 100;
             background: rgba(255,255,255,0.6); padding: 5px 15px; border-radius: 8px;
         }
+/* Container for both buttons */
+#panic-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 25000;
+}
 
-        .panic-btn {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            font-size: 16px; cursor: pointer; z-index: 25000;
-            background: #ff4b4b; padding: 10px 25px; border-radius: 8px;
-            font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-        .panic-btn:hover { transform: translateX(-50%) scale(1.05); }
+/* Updated Panic Button (removed fixed position since container handles it) */
+.panic-btn {
+    position: static !important;
+    transform: none !important;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ff4b4b;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
 
+/* The small drag handle button */
+.drag-handle {
+    cursor: grab;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    user-select: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.drag-handle:active { cursor: grabbing; }
         /* --- Content Layout --- */
         .page-content { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px; }
         .active-page { display: flex; }
@@ -148,8 +177,10 @@
 <body onload="initSite()">
 
     <div id="hamBtn" class="hamburger" onclick="handleNav(true)">&#9776;</div>
+   <div id="panic-container">
+    <div id="dragHandle" class="drag-handle">⠿</div>
     <button id="mainPanic" class="panic-btn" onclick="doPanic()">PANIC</button>
-
+</div>
     <div id="navPanel" class="side-panel">
         <span style="position: absolute; font-size: 30px; cursor: pointer; top:10px; right:15px;" onclick="handleNav(false)">&times;</span>
         <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/T!tan-sidebar-logo.png" class="sidebar-logo" onclick="changeContent('homePage')">
@@ -531,7 +562,57 @@
                         document.getElementById("panic-iframe").src = "";
                     }
                     loadGame();
-                <\/script>
+                    // --- Drag and Drop Logic ---
+const panicContainer = document.getElementById("panic-container");
+const dragHandle = document.getElementById("dragHandle");
+
+let isDragging = false;
+let offsetX, offsetY;
+
+// Load saved position
+const savedPos = JSON.parse(localStorage.getItem('panicPosition'));
+if (savedPos) {
+    panicContainer.style.left = savedPos.x + 'px';
+    panicContainer.style.top = savedPos.y + 'px';
+    panicContainer.style.transform = 'none'; // Remove centered transform if moved
+}
+
+dragHandle.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    // Calculate offset between mouse and container corner
+    const rect = panicContainer.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    dragHandle.style.cursor = "grabbing";
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    // Calculate new position
+    let x = e.clientX - offsetX;
+    let y = e.clientY - offsetY;
+
+    // Apply styles
+    panicContainer.style.left = x + "px";
+    panicContainer.style.top = y + "px";
+    panicContainer.style.transform = "none"; // Disable the default centering
+});
+
+document.addEventListener("mouseup", () => {
+    if (isDragging) {
+        isDragging = false;
+        dragHandle.style.cursor = "grab";
+        
+        // Save position to local storage
+        const pos = {
+            x: panicContainer.offsetLeft,
+            y: panicContainer.offsetTop
+        };
+        localStorage.setItem('panicPosition', JSON.stringify(pos));
+    }
+});
+                </script>
             </body>
             </html>
         `;
