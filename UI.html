@@ -440,46 +440,16 @@
             const domain = "https://realworld.helpforukraine.at/render.html?url="; 
             const encoded = btoa(input);
             const fullUrl = domain + encoded;
-            const newWin = window.open('about:blank', '_blank');
-            if (newWin) {
-                newWin.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Clever | Portal</title>
-                        <style>
-                            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
-                            .panic-btn {
-                                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                                font-size: 16px; cursor: pointer; z-index: 25000;
-                                background: #ff4b4b; padding: 10px 25px; border-radius: 8px;
-                                font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                                transition: transform 0.2s; color: #000;
-                            }
-                            #main-game-iframe { width: 100%; height: 100%; border: none; }
-                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 1000000; }
-                            #panic-iframe { width: 100%; height: 100%; border: none; }
-                            .close-panic { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: #000; font-weight: bold; z-index: 1000001; }
-                        </style>
-                    </head>
-                    <body>
-                        <button class="panic-btn" onclick="doPanic()">PANIC</button>
-                        <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
-                        <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">×</span><iframe id="panic-iframe"></iframe></div>
-                        <script>
-                            const PANIC_URL = "${document.getElementById("panicUrlInput").value || 'https://clever.com'}"; 
-                            function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
-                            function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
-                        <\/script>
-                    </body>
-                    </html>
-                `);
-                newWin.document.close();
-            }
+            launchBlank(fullUrl);
         }
 
         function launchGame(gameUrl, gameTitle) {
+            launchBlank(gameUrl, true);
+        }
+
+        function launchBlank(url, isGameFetch = false) {
             const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
+            const currentPos = JSON.parse(localStorage.getItem('panicPosition')) || { x: 50, y: 20 };
             const newWin = window.open('about:blank', '_blank');
             
             if (newWin) {
@@ -492,15 +462,18 @@
                         <style>
                             html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
                             #viewer { width: 100%; height: 100%; border: none; background: white; }
-                            #panic-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; z-index: 99999; }
+                            #panic-container { position: fixed; top: ${currentPos.y}px; left: ${currentPos.x}px; display: flex; align-items: center; gap: 5px; z-index: 99999; }
                             .panic-btn { font-size: 16px; cursor: pointer; background: #ff4b4b; padding: 10px 25px; border-radius: 8px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); color: #000; }
                             .drag-handle { cursor: grab; background: rgba(255, 255, 255, 0.6); padding: 10px 8px; border-radius: 8px; font-size: 16px; user-select: none; }
                             #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
                             #panic-iframe { width: 100%; height: 100%; border: none; }
                             .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #000; font-weight: bold; z-index: 100001; }
+                            /* Prevent iframe from stealing mouse events during drag */
+                            #drag-shield { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99998; }
                         </style>
                     </head>
                     <body>
+                        <div id="drag-shield"></div>
                         <div id="panic-container">
                             <div id="dragHandle" class="drag-handle">⠿</div>
                             <button class="panic-btn" onclick="doPanic()">PANIC</button>
@@ -508,33 +481,65 @@
                         <iframe id="viewer"></iframe>
                         <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
                         <script>
-                            const githubHTMLUrl = "${gameUrl}";
                             const PANIC_URL = "${panicUrl}"; 
-                            async function loadGame() {
-                                try {
-                                    const response = await fetch(githubHTMLUrl);
-                                    let html = await response.text();
-                                    const baseUrl = githubHTMLUrl.substring(0, githubHTMLUrl.lastIndexOf("/") + 1);
-                                    html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
-                                    const iframe = document.getElementById("viewer");
-                                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                                    iframeDoc.open();
-                                    iframeDoc.write(html);
-                                    iframeDoc.close();
-                                } catch (err) { console.error(err); }
+                            const targetUrl = "${url}";
+                            const shield = document.getElementById('drag-shield');
+                            
+                            async function loadContent() {
+                                const iframe = document.getElementById("viewer");
+                                if (${isGameFetch}) {
+                                    try {
+                                        const response = await fetch(targetUrl);
+                                        let html = await response.text();
+                                        const baseUrl = targetUrl.substring(0, targetUrl.lastIndexOf("/") + 1);
+                                        html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
+                                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                                        iframeDoc.open();
+                                        iframeDoc.write(html);
+                                        iframeDoc.close();
+                                    } catch (err) { iframe.src = targetUrl; }
+                                } else {
+                                    iframe.src = targetUrl;
+                                }
                             }
+
                             function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
                             function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
                             
-                            // Re-implement drag for injected window
-                            const pContainer = document.getElementById("panic-container");
-                            const dHandle = document.getElementById("dragHandle");
-                            let isDragging = false, offX, offY;
-                            dHandle.onmousedown = (e) => { isDragging = true; offX = e.clientX - pContainer.offsetLeft; offY = e.clientY - pContainer.offsetTop; dHandle.style.cursor="grabbing"; };
-                            document.onmousemove = (e) => { if(!isDragging) return; pContainer.style.left = (e.clientX - offX) + "px"; pContainer.style.top = (e.clientY - offY) + "px"; pContainer.style.transform="none"; };
-                            document.onmouseup = () => { isDragging = false; dHandle.style.cursor="grab"; };
+                            // Drag Fix
+                            const container = document.getElementById("panic-container");
+                            const handle = document.getElementById("dragHandle");
+                            let dragging = false, offsetX, offsetY;
+
+                            handle.onmousedown = (e) => {
+                                dragging = true;
+                                const rect = container.getBoundingClientRect();
+                                offsetX = e.clientX - rect.left;
+                                offsetY = e.clientY - rect.top;
+                                handle.style.cursor = "grabbing";
+                                shield.style.display = "block"; // Start shield
+                            };
+
+                            document.onmousemove = (e) => {
+                                if (!dragging) return;
+                                container.style.left = (e.clientX - offsetX) + "px";
+                                container.style.top = (e.clientY - offsetY) + "px";
+                                container.style.transform = "none";
+                            };
+
+                            document.onmouseup = () => {
+                                dragging = false;
+                                handle.style.cursor = "grab";
+                                shield.style.display = "none"; // Remove shield
+                                try {
+                                    localStorage.setItem('panicPosition', JSON.stringify({
+                                        x: parseInt(container.style.left),
+                                        y: parseInt(container.style.top)
+                                    }));
+                                } catch(e) {}
+                            };
                             
-                            loadGame();
+                            loadContent();
                         <\/script>
                     </body>
                     </html>
@@ -544,32 +549,27 @@
             }
         }
 
-        // Shared dragging logic
         function setupDraggable(container, handle) {
-            let isDragging = false;
-            let offsetX, offsetY;
-
+            let isDragging = false, offsetX, offsetY;
             const savedPos = JSON.parse(localStorage.getItem('panicPosition'));
             if (savedPos) {
                 container.style.left = savedPos.x + 'px';
                 container.style.top = savedPos.y + 'px';
                 container.style.transform = 'none';
             }
-
             handle.addEventListener("mousedown", (e) => {
                 isDragging = true;
-                offsetX = e.clientX - container.offsetLeft;
-                offsetY = e.clientY - container.offsetTop;
+                const rect = container.getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
                 handle.style.cursor = "grabbing";
             });
-
             document.addEventListener("mousemove", (e) => {
                 if (!isDragging) return;
                 container.style.left = (e.clientX - offsetX) + "px";
                 container.style.top = (e.clientY - offsetY) + "px";
                 container.style.transform = "none";
             });
-
             document.addEventListener("mouseup", () => {
                 if (isDragging) {
                     isDragging = false;
