@@ -179,7 +179,7 @@
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
             <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
-            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%; max-height: 80px;"></h1>
+            <h1>Games</h1>
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
@@ -245,13 +245,13 @@
     <div id="appsPage" class="page-content">
         <div class="full-width-container">
             <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
-            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%; max-height: 80px;"></h1>
-            <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
+            <h1>Apps</h1>
+            <input type="text" placeholder="Search Apps..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
                 <div class="item" data-title="Duckmath"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/refs/heads/main/duck-math.html')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/duck.webp"></a><div class="title">Duck Math</div></div>
             </div>
-            <div id="no-results" style="display:none; padding:40px;">No games found.</div>
+            <div id="no-results" style="display:none; padding:40px;">No apps found.</div>
         </div>
     </div>
 
