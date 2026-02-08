@@ -145,6 +145,7 @@
             <div class="menu-item" onclick="changeContent('soundboardPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soundboard-icon.png" class="menu-icon">Soundboards</div>
             <div class="menu-item" onclick="changeContent('proxiesPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/proxies.png" class="menu-icon">Proxies</div>
             <div class="menu-item" onclick="changeContent('blooketPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
+            <div class="menu-item" onclick="changeContent('appsPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/apps.png" class="menu-icon">Apps</div>
             <div class="menu-item" onclick="toggleSettings(true)"><img src="https://raw.githubusercontent.com/helloflygh/games/main/settings-icon.png" class="menu-icon">Settings</div>
         </div>
         <div id="settingsMenu" style="display:none;">
@@ -178,7 +179,7 @@
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
             <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
-            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%; max-height: 80px;"></h1>
+            <h1>Games</h1>
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
@@ -241,6 +242,19 @@
         </div>
     </div>
 
+    <div id="appsPage" class="page-content">
+        <div class="full-width-container">
+            <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
+            <h1>Apps</h1>
+            <input type="text" placeholder="Search Apps..." id="search" onkeyup="filterImages()">
+            
+            <div class="grid" id="grid">
+                <div class="item" data-title="Duckmath"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/refs/heads/main/duck-math.html')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/duck.webp"></a><div class="title">Duck Math</div></div>
+            </div>
+            <div id="no-results" style="display:none; padding:40px;">No apps found.</div>
+        </div>
+    </div>
+
     <div id="proxiesPage" class="page-content">
         <div class="full-width-container">
             <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
@@ -298,7 +312,7 @@
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "50+ Games!", "Major Updates every Monday!!!", "The best unblocked site... probably."];
+        const quotes = ["Who actually reads these?", "Is this update even good?", "Keep clicking, I dare you.", "R.I.P. n3bula, s4turn, algebra1topics, lizz, m00n, and cool games.", "55+ Games!", "T!tan - The respect you deserve. The Odyssey ignores you.", "Major Updates every Monday!!!", "The best unblocked site... probably.", "Mateoooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "remember that m0th3rcristal site well its gone now hahaha", "Theres no 'sneak dissing' in 'The Odysseys owner goons to mario'", "ERR LOADING GOOD GAMES - Its prolly because your on The Odyssey", "I think Mavrick had a lil too much of his mothers crystals"];
         let lastQuoteIndex = -1;
 
         function initSite() {
