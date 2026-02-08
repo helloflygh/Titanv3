@@ -312,7 +312,7 @@
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "55+ Games!", "Major Updates every Monday!!!", "The best unblocked site... probably.", "Mateooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "remember that m0th3rcristal site well its gone now hahaha", "Theres no 'sneak dissing' in 'The Odysseys owner goons to mario'", "ERR LOADING GOOD GAMES - Its prolly because your on The Odyssey", "I think Mavrick had a lil too much of his mothers crystals"];
+        const quotes = ["Who actually reads these?", "Is this update even good?", "Keep clicking, I dare you.", "R.I.P. n3bula, s4turn, algebra1topics, lizz, m00n, and cool games.", "55+ Games!", "T!tan - The respect you deserve. The Odyssey ignores you.", "Major Updates every Monday!!!", "The best unblocked site... probably.", "Mateoooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "remember that m0th3rcristal site well its gone now hahaha", "Theres no 'sneak dissing' in 'The Odysseys owner goons to mario'", "ERR LOADING GOOD GAMES - Its prolly because your on The Odyssey", "I think Mavrick had a lil too much of his mothers crystals"];
         let lastQuoteIndex = -1;
 
         function initSite() {
