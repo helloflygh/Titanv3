@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- 
- T!tan v3 UI, to anyone out there feel free to use this :P
--->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +25,6 @@
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
             overflow-x: hidden;
-            /* Add the line below to enable vertical scrolling */
             overflow-y: auto; 
         }
 
@@ -68,207 +62,205 @@
             background: rgba(255,255,255,0.6); padding: 5px 15px; border-radius: 8px;
         }
 
-        .panic-btn {
+        #panic-container {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            font-size: 16px; cursor: pointer; z-index: 25000;
-            background: #ff4b4b; padding: 10px 25px; border-radius: 8px;
-            font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            display: flex; align-items: center; gap: 5px; z-index: 25000;
         }
-        .panic-btn:hover { transform: translateX(-50%) scale(1.05); }
 
-        /* --- Content Layout --- */
+        .panic-btn {
+            font-size: 16px; cursor: pointer; background: #ff4b4b; padding: 10px 25px;
+            border-radius: 8px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .drag-handle {
+            cursor: grab; background: rgba(255, 255, 255, 0.6); padding: 10px 8px;
+            border-radius: 8px; font-size: 16px; user-select: none;
+        }
+
         .page-content { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px; }
         .active-page { display: flex; }
-
-        #homePage img { width: 100%; max-width: 750px; margin-top: 120px; height: auto; }
-        
-        .quote-box {
-            font-style: italic; font-weight: bold; margin-top: 15px;
-            min-height: 24px; transition: opacity 0.5s ease;
-        }
 
         .full-width-container {
             position: relative; width: 95vw; max-width: 1300px; margin: 40px auto; padding: 30px;
             background: var(--glass-bg); backdrop-filter: var(--glass-blur); border-radius: 20px;
         }
 
-        .proxy-container {
-            background: rgba(255,255,255,0.3); padding: 30px; border-radius: 15px; margin-top: 20px;
-        }
-        .proxy-input { 
-            width: 100%; max-width: 400px; padding: 15px; border: none; border-radius: 30px; 
-            margin-bottom: 15px; outline: none;
-        }
-
-        #soundboard-frame {
-            width: 100%; height: 80vh; border: none; border-radius: 15px;
-            background: #000;
-        }
-
-        .blank-btn {
-            cursor: pointer; background: var(--glass-bg); backdrop-filter: var(--glass-blur);
-            padding: 15px 35px; border-radius: 30px; border: 1px solid rgba(0,0,0,0.1);
-            font-weight: bold; transition: 0.3s; margin-top: 20px; margin-bottom: 50px;
-        }
-        .blank-btn:hover { transform: scale(1.05); }
-
-        #req-btn {
-            position: absolute; top: 20px; right: 20px;
-            background: #fff; text-decoration: none; padding: 8px 12px;
-            border-radius: 10px; font-weight: bold; transition: 0.3s;
-        }
-
+        /* Square Grid with Hover Titles */
         .grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 25px; padding: 20px; width: 100%; 
+            display: grid; grid-template-columns: repeat(6, 1fr); 
+            gap: 15px; padding: 20px; width: 100%; 
         }
         
         .item { 
-            background: #fff; border-radius: 14px; overflow: hidden; 
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            position: relative; background: #fff; border-radius: 10px; 
+            overflow: hidden; aspect-ratio: 1 / 1; transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .item:hover { transform: scale(1.08); z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .item a { text-decoration: none; display: block; }
-        .item img { width: 100%; height: 160px; object-fit: cover; }
-        .title { padding: 12px; text-align: center; font-weight: bold; }
+        .item:hover { transform: scale(1.05); z-index: 10; }
+        .item img { width: 100%; height: 100%; object-fit: cover; }
 
-        #search { 
-            width: 100%; max-width: 500px; padding: 15px; margin-bottom: 30px;
-            border-radius: 30px; border: none; outline: none; 
+        .title { 
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 8px 2px; background: rgba(255, 255, 255, 0.9);
+            text-align: center; font-weight: bold; font-size: 0.75rem;
+            opacity: 0; transition: opacity 0.3s ease;
         }
+        .item:hover .title { opacity: 1; }
 
+        #search { width: 100%; max-width: 500px; padding: 15px; margin-bottom: 30px; border-radius: 30px; border: none; outline: none; }
+        .proxy-container { background: rgba(255,255,255,0.3); padding: 30px; border-radius: 15px; margin-top: 20px; }
+        .proxy-input { width: 100%; max-width: 400px; padding: 15px; border: none; border-radius: 30px; margin-bottom: 15px; outline: none; }
+        #soundboard-frame, #blooket-frame { width: 100%; height: 80vh; border: none; border-radius: 15px; background: #000; }
+        .blank-btn { cursor: pointer; background: var(--glass-bg); backdrop-filter: var(--glass-blur); padding: 15px 35px; border-radius: 30px; border: 1px solid rgba(0,0,0,0.1); font-weight: bold; transition: 0.3s; margin-top: 20px; }
         #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 30000; }
         #panic-iframe { width: 100%; height: 100%; border: none; }
+
+       /* Updated Quote Box Styles */
+        #quoteDisplay {
+            font-weight: bold !important;
+            font-style: italic;           /* <--- ADD THIS LINE */
+            font-size: 20px;               /* <--- ADD THIS LINE (Change 24 to any size you want) */
+            transition: opacity 0.8s ease-in-out;
+            opacity: 1;
+        }
+
+        @media (max-width: 1000px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body onload="initSite()">
 
     <div id="hamBtn" class="hamburger" onclick="handleNav(true)">&#9776;</div>
-    <button id="mainPanic" class="panic-btn" onclick="doPanic()">PANIC</button>
+   
+    <div id="panic-container">
+        <div id="dragHandle" class="drag-handle">⠿</div>
+        <button id="mainPanic" class="panic-btn" onclick="doPanic()">PANIC</button>
+    </div>
 
     <div id="navPanel" class="side-panel">
         <span style="position: absolute; font-size: 30px; cursor: pointer; top:10px; right:15px;" onclick="handleNav(false)">&times;</span>
         <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/T!tan-sidebar-logo.png" class="sidebar-logo" onclick="changeContent('homePage')">
         <div id="mainLinks">
             <div class="menu-item" onclick="changeContent('gamesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/pngimg.com%20-%20gamepad_PNG58.png" class="menu-icon">Games</div>
-            <div class="menu-item" onclick="changeContent('moviesPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/movies.png" class="menu-icon">Movies</div>
             <div class="menu-item" onclick="changeContent('soundboardPage')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soundboard-icon.png" class="menu-icon">Soundboards</div>
             <div class="menu-item" onclick="changeContent('proxiesPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/proxies.png" class="menu-icon">Proxies</div>
             <div class="menu-item" onclick="changeContent('blooketPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/logo.webp" class="menu-icon">Blooket Hacks</div>
+            <div class="menu-item" onclick="changeContent('appsPage')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/apps.png" class="menu-icon">Apps</div>
             <div class="menu-item" onclick="toggleSettings(true)"><img src="https://raw.githubusercontent.com/helloflygh/games/main/settings-icon.png" class="menu-icon">Settings</div>
         </div>
         <div id="settingsMenu" style="display:none;">
             <div class="menu-item" onclick="toggleSettings(false)" style="font-weight:bold;">← Back</div>
-            <div class="settings-container">
-                <div class="toggle-row"><span>Panic on New Tab</span><label class="switch"><input type="checkbox" id="panicTabToggle" onchange="saveSettings()"><span class="slider"></span></label></div>
-                <label>Panic URL:</label><input type="text" id="panicUrlInput" class="settings-input" onchange="saveSettings()" placeholder="https://clever.com">
-                <div class="toggle-row"><span>Enable Hotkey</span><label class="switch"><input type="checkbox" id="shortcutToggle" onchange="saveSettings()"><span class="slider"></span></label></div>
-                <label>Hotkey: Ctrl +</label><input type="text" id="panicKeyInput" class="settings-input" style="width:50px; text-align:center;" maxlength="1" onchange="saveSettings()">
+            <div class="settings-container" style="padding:20px; text-align:left;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;"><span>Panic on New Tab</span><input type="checkbox" id="panicTabToggle" onchange="saveSettings()"></div>
+                <label>Panic URL:</label><input type="text" id="panicUrlInput" style="width:100%; padding:8px; margin:10px 0;" onchange="saveSettings()" placeholder="https://clever.com">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;"><span>Enable Hotkey</span><input type="checkbox" id="shortcutToggle" onchange="saveSettings()"></div>
+                <label>Hotkey: Ctrl +</label><input type="text" id="panicKeyInput" style="width:50px; padding:8px; text-align:center;" maxlength="1" onchange="saveSettings()">
             </div>
         </div>
     </div>
 
     <div id="homePage" class="page-content active-page">
-        <img src="https://raw.githubusercontent.com/helloflygh/games/main/IMG_3750-removebg-preview.png">
+        <img src="https://raw.githubusercontent.com/helloflygh/games/main/IMG_3750-removebg-preview.png" style="width: 100%; max-width: 750px; margin-top: 120px;">
         <div style="background:var(--glass-bg); padding:20px; border-radius:15px; margin:20px; max-width: 600px; width: 90%;">
-            <h2>Version 3.1.1</h2>
-            <div id="quoteDisplay" class="quote-box">Welcome to T!tan! The ultimate class boredom killer.</div>
-            <h1>Proxy and Blooket Hacks are Back!!!</h1>
-            <p> We fixed all games exept crazy cattle 3d</p>
-            <h1> Official Link Doc!!!</h1>
-            <p> If t!tan gets blocked again, the new link will be put on the doc. i will make a button but in the meantime heres the link to the doc (you have to request acess) </p>
-            <p>Doc link:  https://docs.google.com/document/d/1lpijle8OnWQFeJTE_I5FnJ1cEWeeBCl4mH38fOI2AGc/edit?tab=t.0 </p>
-            <h1>How do i know if T!tan gets blocked?</h1>
-            <p> I will never make you request acess. if you dont have acess, then the website is blocked.</p>
-            <h1> Oddyssey awareness</h1>
-            <p> S4turn v3 is being developed, but the owner of odyssey found the link, and stole all of s4turns UI ideas.</p>
-            <h1> Whats T!tan?</h1>
-            <p> Ever since n3bula went down, i have set out to make T!tan, to bring back game websites for everyone.</p>
-            <p> By using T!tan, you agree to our terms of service.</p>
+            <h2>Version 3.2.0</h2>
+            <div id="quoteDisplay" class="quote-box">Welcome to T!tan! The Ultimate Class Boredom Killer</div>
+            <h1> Whats New?</h1>
+            <b>Press The ⠿ Button To Customize The Location of The Panic Button!</b>
+            <p>The proxy is down it will be fixed next week for the update (look below)</p>
+            <h1> Official doc!</h1>
+            <p>To Get BTS Info, and the links in case this site gets blocked, go to the doc!(you have to request acess) <b>https://docs.google.com/document/d/180oQvO9p90bXJufiuBLE-ZQDHRHsQWwVExiIma_LoD0/edit?tab=t.ucyi8k6wogp4</b></p>
+            <h1> Next Update: Cosmos Browser</h1>
+            <p> Next Monday I will add our new custom proxy browser called Cosmos.</p>
+            <h1> Terms Of Service</h1>
+            <b>By using T!tan, you agree to our Terms of Service (on official doc)</b>
         </div>
-        </div>
+    </div>
 
     <div id="gamesPage" class="page-content">
         <div class="full-width-container">
-            <a href="https://forms.gle/mwpWQFpLSZ5fmkLQ6" id="req-btn" target="_blank">📃 Request</a>
-            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%;"></h1>
+            <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
+            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%; max-height: 80px;"></h1>
             <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
-                <div class="item" data-title="1v1 LOL"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/1v1.lol.html', '1v1 LOL')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">1v1 LOL</div></div>
-                <div class="item" data-title="3Dash"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/3dash.html', '3Dash')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/3dash.jpeg"></a><div class="title">3Dash</div></div>
-                <div class="item" data-title="ages of confict"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/agesofconflict.html', 'Ages of Conflict')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(46).jpeg"></a><div class="title">Ages of Conflict</div></div>
-                <div class="item" data-title="apple worm"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/applewormgame.html', 'Apple Worm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/appleworm.jpeg"></a><div class="title">Apple Worm</div></div>
-                <div class="item" data-title="basket bros"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketbros.html', 'Basket Bros')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"></a><div class="title">Basket Bros</div></div>
-                <div class="item" data-title="basketball legends"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketballlegends.html', 'Basketball Legends')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/legends.jpeg"></a><div class="title">Basketball Legends</div></div>
-                <div class="item" data-title="basket random"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketrandom.html', 'Basket Random')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"></a><div class="title">Basket Random</div></div>
-                <div class="item" data-title="backrooms"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/backrooms.html', 'Backrooms')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/backrooms.jpg"></a><div class="title">Backrooms</div></div>
-                <div class="item" data-title="bacon may dye"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/baconmaydie.html', 'Bacon May Dye')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.jpeg"></a><div class="title">Bacon May Dye</div></div>
-                <div class="item" data-title="bacon may dye beta"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/baconmaydiebeta.html', 'Bacon May Dye (BETA)')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"></a><div class="title">Bacon May Dye (BETA)</div></div>
-                <div class="item" data-title="berrys prison run"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/prison-obby.html', 'Berrys Prison Run (OBBY)')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/prison-obby.jpg"></a><div class="title">Berrys Prison Run (Obby)</div></div>
-                <div class="item" data-title="bitlife"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/bitlife.html', 'Bitlife')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(36).jpeg"></a><div class="title">Bitlife</div></div>
-                <div class="item" data-title="BlackJack"><a href="javascript:void(0)" onclick="launchGame('http://raw.githubusercontent.com/helloflygh/games/main/clblackjack.html', 'BlackJack')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/black.jpg"></a><div class="title">BlackJack</div></div>
-                <div class="item" data-title="buckshot roulette"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/buckshot.html', 'Buckshot Roulette')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/buckshotroulettegame.webp"></a><div class="title">Buckshot Roulette</div></div>
-                <div class="item" data-title="crazy cattle 3d"><a href="javascript:void(0)" onclick="launchGame('paste here', 'Crazy Cattle 3D')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.jpeg"></a><div class="title">Crazy Cattle 3D</div></div>
-                <div class="item" data-title="drift boss"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/driftboss.htm', 'Drift Boss')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.27.46%20PM.png"></a><div class="title">Drift Boss</div></div>
-                <div class="item" data-title="drive mad"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/drivemad.htm', 'Drive Mad')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(35).jpeg"></a><div class="title">Drive Mad</div></div>
-                <div class="item" data-title="escape road"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/escaperoad.html', 'Escape Road')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/escape.jpeg"></a><div class="title">Escape Road</div></div>
-                <div class="item" data-title="escape road 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/escaperoad2.html', 'Escape Road 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(39).jpeg"></a><div class="title">Escape Road 2</div></div>
-                <div class="item" data-title="fastkat"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/fastkat.html', 'FastKat')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.jpg"></a><div class="title">FastKat</div></div>
-                <div class="item" data-title="fnaf 1"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%20(1).html', 'FNaF 1')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.26%20AM.png"></a><div class="title">FNaF 1</div></div>
-                <div class="item" data-title="fnaf 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%202%20(1).html', 'FNaF 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.42%20AM.png"></a><div class="title">FNaF 2</div></div>
-                <div class="item" data-title="fnaf 3"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%203%20(1).html', 'FNaF 3')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(38).jpeg"></a><div class="title">FNaF 3</div></div>
-                <div class="item" data-title="fnaf 4"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%204%20(1).html', 'FNaF 4')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/fnaf4.jpeg"></a><div class="title">FNaF 4</div></div>
-                <div class="item" data-title="geometry dash"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/geometrydash.html', 'Geometry Dash')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/geometrydash.jpeg"></a><div class="title">Geometry Dash</div></div>
-                <div class="item" data-title="granny"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/granny.html', 'Granny')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/granny.webp"></a><div class="title">Granny</div></div>
-                <div class="item" data-title="granny 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/granny2.html', 'Granny 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/granny2.webp"></a><div class="title">Granny 2</div></div>
-                <div class="item" data-title="happy wheels"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/happywheels.html', 'Happy Wheels')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(40).jpeg"></a><div class="title">Happy Wheels</div></div>
-                <div class="item" data-title="house of hazzards"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/houseofhazards.html', 'House of Hazzards')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/houseofhazards.jpeg"></a><div class="title">House of Hazzards</div></div>
-                <div class="item" data-title="level devil"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/leveldevil.html', 'Level Devil')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/levil.jpeg"></a><div class="title">Level Devil</div></div>
-                <div class="item" data-title="minecraft"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/minecraft.html', 'Minecraft')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(44).jpeg"></a><div class="title">Minecraft</div></div>
-                <div class="item" data-title="monkey mart"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/monkeymart.htm', 'Monkey Mart')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(42).jpeg"></a><div class="title">Monkey Mart</div></div>
-                <div class="item" data-title="moto x3m"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m.htm', 'Moto x3m')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m.png"></a><div class="title">Moto x3m</div></div>
-                <div class="item" data-title="moto x3m 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m2.html', 'Moto x3m 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-2-m186x186.webp"></a><div class="title">Moto x3m 2</div></div>
-                <div class="item" data-title="moto x3m 3"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m3.html', 'Moto x3m 3')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-3-m186x186.webp"></a><div class="title">Moto x3m 3</div></div>
-                <div class="item" data-title="only up"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/onlyupgame.html', 'Only Up')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/onlyup.jpeg"></a><div class="title">Only Up</div></div>
-                <div class="item" data-title="plants vs zombies"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/plantsvszombies.html', 'Plants vs Zombies')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/plants.jpeg"></a><div class="title">Plants vs Zombies</div></div>
-                <div class="item" data-title="retro bowl"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/retrobowl.html', 'Retro Bowl')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.png"></a><div class="title">Retro Bowl</div></div>
-                <div class="item" data-title="rocket leauge"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/clrocketleague.html', 'Rocket Leauge')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/rocket.jpeg"></a><div class="title">Rocket Leauge</div></div>
-                <div class="item" data-title="slope"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/slope.html', 'Slope')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(4).png"></a><div class="title">Slope</div></div>
-                <div class="item" data-title="slope 2 player"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/slope2player.html', 'Slope 2 Player')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slope-2-player-game.png"></a><div class="title">Slope 2 Player</div></div>
-                <div class="item" data-title="slow roads"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/slowroads.html', 'Slow Roads')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slow.jpeg"></a><div class="title">Slow Roads</div></div>
-                <div class="item" data-title="snow rider"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/snowrider.htm', 'Snow Rider')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/SnowRIder.png"></a><div class="title">Snow Rider</div></div>
-                <div class="item" data-title="soccer random"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/soccerrandom.htm', 'Soccer Random')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soccer.jpeg"></a><div class="title">Soccer Random</div></div>
-                <div class="item" data-title="Space Waves"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/spacewaves.html', 'Space Waves')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202026-01-19%207.35.51%20PM.png"></a><div class="title">Space Waves</div></div>
-                <div class="item" data-title="steal a brainrot"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/sab.html', 'Steal a Brainrot')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/stealabrainrot.jpeg"></a><div class="title">Steal a Brainrot</div></div>
-                <div class="item" data-title="stickman climb"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Stickman%20Climb.html', 'Stickman Climb')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
-                <div class="item" data-title="stickman hook"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/stickmanhook.html', 'Stickman Hook')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
-                <div class="item" data-title="temple run 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/templerun2.htm', 'Temple Run 2')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(45).jpeg"></a><div class="title">Temple Run 2</div></div>
-                <div class="item" data-title="wheelie bike"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/wheeliebike.html', 'Wheelie Bike')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/images%20(4).png"></a><div class="title">Wheelie Bike</div></div>
+                <div class="item" data-title="1v1 LOL"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/1v1.lol.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">1v1 LOL</div></div>
+                <div class="item" data-title="3Dash"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/3dash.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/3dash.jpeg"></a><div class="title">3Dash</div></div>
+                <div class="item" data-title="Ages of Conflict"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/agesofconflict.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(46).jpeg"></a><div class="title">Ages of Conflict</div></div>
+                <div class="item" data-title="Apple Worm"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/applewormgame.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/appleworm.jpeg"></a><div class="title">Apple Worm</div></div>
+                <div class="item" data-title="Basket Bros"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketbros.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/basketbros.jpeg"></a><div class="title">Basket Bros</div></div>
+                <div class="item" data-title="Basketball Legends"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketballlegends.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/legends.jpeg"></a><div class="title">Basketball Legends</div></div>
+                <div class="item" data-title="Basket Random"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/basketrandom.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(41).jpeg"></a><div class="title">Basket Random</div></div>
+                <div class="item" data-title="Backrooms"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/backrooms.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/backrooms.jpg"></a><div class="title">Backrooms</div></div>
+                <div class="item" data-title="Bacon May Dye"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/baconmaydie.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.jpeg"></a><div class="title">Bacon May Dye</div></div>
+                <div class="item" data-title="Bacon May Dye Beta"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/baconmaydiebeta.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/bacon.webp"></a><div class="title">Bacon May Dye (BETA)</div></div>
+                <div class="item" data-title="Berrys Prison Run"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/prison-obby.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/prison-obby.jpg"></a><div class="title">Berrys Prison Run</div></div>
+                <div class="item" data-title="Bitlife"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/bitlife.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(36).jpeg"></a><div class="title">Bitlife</div></div>
+                <div class="item" data-title="BlackJack"><a href="javascript:void(0)" onclick="launchGame('http://raw.githubusercontent.com/helloflygh/games/main/clblackjack.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/black.jpg"></a><div class="title">BlackJack</div></div>
+                <div class="item" data-title="Block Blast"><a href="javascript:void(0)" onclick="launchGame('http://raw.githubusercontent.com/helloflygh/games/refs/heads/main/blockblast.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/blockblast.webp"></a><div class="title">Block Blast</div></div>
+                <div class="item" data-title="Buckshot Roulette"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/buckshot.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/buckshotroulettegame.webp"></a><div class="title">Buckshot Roulette</div></div>
+                <div class="item" data-title="Crazy Cattle 3D"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/crazycattle.jpeg"></a><div class="title">Crazy Cattle 3D</div></div>
+                <div class="item" data-title="Drift Boss"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/driftboss.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-28%204.27.46%20PM.png"></a><div class="title">Drift Boss</div></div>
+                <div class="item" data-title="Drive Mad"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/drivemad.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(35).jpeg"></a><div class="title">Drive Mad</div></div>
+                <div class="item" data-title="Escape Road"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/escaperoad.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/escape.jpeg"></a><div class="title">Escape Road</div></div>
+                <div class="item" data-title="Escape Road 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/escaperoad2.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(39).jpeg"></a><div class="title">Escape Road 2</div></div>
+                <div class="item" data-title="FastKat"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/fastkat.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.jpg"></a><div class="title">FastKat</div></div>
+                <div class="item" data-title="Football Bros"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/refs/heads/master/offline/footballbros.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/FootballBros.png"></a><div class="title">Football Bros</div></div>
+                <div class="item" data-title="FNaF 1"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%20(1).html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.26%20AM.png"></a><div class="title">FNaF 1</div></div>
+                <div class="item" data-title="FNaF 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%202%20(1).html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202025-12-26%2010.22.42%20AM.png"></a><div class="title">FNaF 2</div></div>
+                <div class="item" data-title="FNaF 3"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%203%20(1).html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(38).jpeg"></a><div class="title">FNaF 3</div></div>
+                <div class="item" data-title="FNaF 4"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Five%20Nights%20at%20Freddy\'s%204%20(1).html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/fnaf4.jpeg"></a><div class="title">FNaF 4</div></div>
+                <div class="item" data-title="Geometry Dash Lite"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/geometrydashlite.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/geometrydash.jpeg"></a><div class="title">Geometry Dash Lite</div></div>
+                <div class="item" data-title="Geometry Dash Scratch"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/geometrydash.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202026-01-30%201.29.11%20PM.png"></a><div class="title">GD Scratch</div></div>
+                <div class="item" data-title="Granny"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/granny.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/granny.webp"></a><div class="title">Granny</div></div>
+                <div class="item" data-title="Granny 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/granny2.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/granny2.webp"></a><div class="title">Granny 2</div></div>
+                <div class="item" data-title="Granny 3"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/granny3.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/granny3.webp"></a><div class="title">Granny 3</div></div>
+                <div class="item" data-title="Happy Wheels"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/happywheels.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(40).jpeg"></a><div class="title">Happy Wheels</div></div>
+                <div class="item" data-title="House of Hazards"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/houseofhazards.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/houseofhazards.jpeg"></a><div class="title">House of Hazards</div></div>
+                <div class="item" data-title="Level Devil"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/leveldevil.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/levil.jpeg"></a><div class="title">Level Devil</div></div>
+                <div class="item" data-title="Minecraft"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/main/minecraft.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(44).jpeg"></a><div class="title">Minecraft</div></div>
+                <div class="item" data-title="Monkey Mart"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/monkeymart.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(42).jpeg"></a><div class="title">Monkey Mart</div></div>
+                <div class="item" data-title="Moto X3M"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m.png"></a><div class="title">Moto X3M</div></div>
+                <div class="item" data-title="Moto X3M 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m2.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-2-m186x186.webp"></a><div class="title">Moto X3M 2</div></div>
+                <div class="item" data-title="Moto X3M 3"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m3.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-3-m186x186.webp"></a><div class="title">Moto X3M 3</div></div>
+                <div class="item" data-title="Only Up"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/onlyupgame.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/onlyup.jpeg"></a><div class="title">Only Up</div></div>
+                <div class="item" data-title="Plants vs Zombies"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/plantsvszombies.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/plants.jpeg"></a><div class="title">PvZ</div></div>
+                <div class="item" data-title="Retro Bowl"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/retrobowl.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/unnamed.png"></a><div class="title">Retro Bowl</div></div>
+                <div class="item" data-title="Rocket League"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/clrocketleague.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/rocket.jpeg"></a><div class="title">Rocket League</div></div>
+                <div class="item" data-title="Slope"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/slope.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(4).png"></a><div class="title">Slope</div></div>
+                <div class="item" data-title="Slope 2 Player"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/slope2player.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slope-2-player-game.png"></a><div class="title">Slope 2P</div></div>
+                <div class="item" data-title="Slow Roads"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/slowroads.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/slow.jpeg"></a><div class="title">Slow Roads</div></div>
+                <div class="item" data-title="Snow Rider"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/snowrider.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/SnowRIder.png"></a><div class="title">Snow Rider</div></div>
+                <div class="item" data-title="Soccer Random"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/soccerrandom.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/soccer.jpeg"></a><div class="title">Soccer Random</div></div>
+                <div class="item" data-title="Space Waves"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/spacewaves.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot%202026-01-19%207.35.51%20PM.png"></a><div class="title">Space Waves</div></div>
+                <div class="item" data-title="Steal a Brainrot"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/sab.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/stealabrainrot.jpeg"></a><div class="title">Steal Brainrot</div></div>
+                <div class="item" data-title="Stickman Climb"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/games/main/Stickman%20Climb.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(43).jpeg"></a><div class="title">Stickman Climb</div></div>
+                <div class="item" data-title="Stickman Hook"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/stickmanhook.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(37).jpeg"></a><div class="title">Stickman Hook</div></div>
+                <div class="item" data-title="Temple Run 2"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/templerun2.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(45).jpeg"></a><div class="title">Temple Run 2</div></div>
+                <div class="item" data-title="Wheelie Bike"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/wheeliebike.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/images%20(4).png"></a><div class="title">Wheelie Bike</div></div>
             </div>
             <div id="no-results" style="display:none; padding:40px;">No games found.</div>
         </div>
     </div>
 
- <div id="moviesPage" class="page-content">
+    <div id="appsPage" class="page-content">
         <div class="full-width-container">
-            <a href="https://forms.gle/mwpWQFpLSZ5fmkLQ6" id="req-btn" target="_blank">📃 Request</a>
-            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%;"></h1>
-            <input type="text" placeholder="Search Movies..." id="search" onkeyup="filterImages()">
+            <a href="https://forms.gle/2wAYP8fPkcHBnyaN8" id="req-btn" target="_blank" style="position: absolute; top: 10px; right: 10px; text-decoration: none; background: #fff; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📃 Request</a>
+            <h1><img src="https://raw.githubusercontent.com/helloflygh/games/main/Screenshot_2026-01-04_2.25.00_PM-removebg-preview.png" style="max-width: 100%; max-height: 80px;"></h1>
+            <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
             
             <div class="grid" id="grid">
-                <div class="item" data-title="Home Alone"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/1v1.lol.html', 'home alone')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/1v1lol.jpeg"></a><div class="title">Home Alone</div></div>
- 
+                <div class="item" data-title="Duckmath"><a href="javascript:void(0)" onclick="launchGame('https://raw.githubusercontent.com/helloflygh/Titanv3/refs/heads/main/duck-math.html')"><img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/duck.webp"></a><div class="title">Duck Math</div></div>
+            </div>
+            <div id="no-results" style="display:none; padding:40px;">No games found.</div>
+        </div>
+    </div>
+
     <div id="proxiesPage" class="page-content">
         <div class="full-width-container">
             <img src="https://raw.githubusercontent.com/helloflygh/Titanv3/main/Screenshot_2026-01-19_164328-removebg-preview.png" style="max-width: 100%; margin-top:20px;">
             <h1>Proxy Version 1.0</h1>
             <div class="proxy-container">
-            <!--
-            Emojis for future proxy status updates: 🟢🔴
-            -->
-                <p>Proxy Status:🟢</p>
+                <p>Proxy Status:🔴</p>
                 <input type="text" id="proxyInput" class="proxy-input" placeholder="Search T!tan Proxy or type a URL">
                 <br>
                 <button class="blank-btn" onclick="launchProxy()">Search</button>
@@ -276,43 +268,16 @@
         </div>
     </div>
 
-  <div id="blooketPage" class="page-content">
+    <div id="blooketPage" class="page-content">
         <div class="full-width-container">
-            <iframe id="soundboard-frame" srcdoc='
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Page Iframe</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevents double scrollbars */
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-
-    <iframe src="https://realworld.helpforukraine.at/render.html?url=aHR0cHM6Ly9ibG9va2V0Ym90LnNjaG9vbGNoZWF0cy5uZXQv" title="Embedded Content"></iframe>
-
-</body>
-</html>
-            '></iframe>
+            <h1>Blooket Hacks</h1>
+            <iframe id="blooket-frame" src="https://blooket-freedom-infinite.b-cdn.net/"></iframe>
         </div>
     </div>
 
     <div id="soundboardPage" class="page-content">
         <div class="full-width-container">
             <h1>T!tan Soundboard</h1>
-            <h1>(please do not overuse this)</h1>
             <iframe id="soundboard-frame" srcdoc='
                 <!DOCTYPE html>
                 <html lang="en">
@@ -332,9 +297,9 @@
                 </head>
                 <body>
                     <div id="controls">
-                        <button id="toggleFavorites" class="control-button favorites-toggle">⭐ Favorites: OFF</button>
-                        <button id="toggleButton" class="control-button overlap-toggle">🔇 Overlap: OFF</button>
-                        <button id="stopButton" class="control-button stop-button">⏹️ Stop All Sounds</button>
+                        <button id="toggleFavorites" class="control-button">⭐ Favorites: OFF</button>
+                        <button id="toggleButton" class="control-button">🔇 Overlap: OFF</button>
+                        <button id="stopButton" class="control-button">⏹️ Stop All Sounds</button>
                         <input id="searchInput" type="text" placeholder="Search sounds...">
                     </div>
                     <div id="soundboard"></div>
@@ -347,7 +312,7 @@
     <div id="panic-overlay"><span style="position:absolute; top:15px; left:15px; font-size:30px; cursor:pointer;" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
 
     <script>
-        const quotes = ["Who actually reads these?", "50+ Games!", "Mateooooooooooooooooooooooooo", "Don't get lost in 'The Odyssey'. T!tans here for YOU!", "R.I.P. n3bula and s4turn.", "Major Updates every Monday!!!", "TYSM S4turn <3", "T!tans’s the way—games for when teachers look away 🎩.", "Is this update even good?", "I think mavrick had a lil too much of his mothers crystals", "Keep clicking, I dare you.", "The best unblocked site... probably."];
+        const quotes = ["Who actually reads these?", "50+ Games!", "Major Updates every Monday!!!", "The best unblocked site... probably."];
         let lastQuoteIndex = -1;
 
         function initSite() {
@@ -357,18 +322,29 @@
             document.getElementById("panicKeyInput").value = localStorage.getItem('panicKey') || 'x';
             updateQuote();
             setInterval(updateQuote, 8000);
+            setupDraggable(document.getElementById("panic-container"), document.getElementById("dragHandle"));
         }
 
+        /* Updated updateQuote Function with Smooth Fading */
         function updateQuote() {
             const display = document.getElementById("quoteDisplay");
             let newIndex;
-            do { newIndex = Math.floor(Math.random() * quotes.length); } while (newIndex === lastQuoteIndex);
-            lastQuoteIndex = newIndex;
+            
+            // Start Fade Out
             display.style.opacity = 0;
+
+            // Wait for fade out to finish (800ms) before changing text and fading in
             setTimeout(() => {
+                do { 
+                    newIndex = Math.floor(Math.random() * quotes.length); 
+                } while (newIndex === lastQuoteIndex);
+                
+                lastQuoteIndex = newIndex;
                 display.textContent = quotes[newIndex];
+                
+                // Start Fade In
                 display.style.opacity = 1;
-            }, 500);
+            }, 800);
         }
 
         function handleNav(isOpen) { document.getElementById("navPanel").style.width = isOpen ? "250px" : "0"; }
@@ -412,142 +388,103 @@
             document.getElementById("no-results").style.display = matches === 0 ? "block" : "none";
         }
 
-        window.addEventListener('keydown', (e) => {
-            const isEnabled = document.getElementById("shortcutToggle").checked;
-            const targetKey = (document.getElementById("panicKeyInput").value || 'x').toLowerCase();
-            if (isEnabled && e.ctrlKey && e.key.toLowerCase() === targetKey) {
-                e.preventDefault(); doPanic();
-            }
-        });
-
-        function openInBlank() {
-            let win = window.open('about:blank', '_blank');
-            if (win) {
-                win.document.write(`<html><head><title>about:blank</title><style>body,html{margin:0;padding:0;height:100%;overflow:hidden;}</style></head><body>${document.documentElement.outerHTML}</body></html>`);
-                win.document.close();
-            }
-        }
-
         function launchProxy() {
             const input = document.getElementById('proxyInput').value;
-            const domain = "https://realworld.helpforukraine.at/render.html?url="; 
-            const encoded = btoa(input);
-            const fullUrl = domain + encoded;
+            const fullUrl = "https://realworld.helpforukraine.at/render.html?url=" + btoa(input);
+            window.open(fullUrl, '_blank');
+        }
+
+        // FETCH CODE LAUNCHER (Restored logic)
+        function launchGame(gameUrl) {
+            const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
             const newWin = window.open('about:blank', '_blank');
             if (newWin) {
-                newWin.document.write(`
+                const loaderHtml = `
                     <!DOCTYPE html>
                     <html>
                     <head>
                         <title>Clever | Portal</title>
+                        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/helloflygh/games/main/clever-favicon.png">
                         <style>
-                            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-                            #top-bar { width: 100%; display: flex; justify-content: center; position: absolute; top: 20px; left: 0; z-index: 9999; pointer-events: none; }
-                            .panic-btn { pointer-events: auto; font-size: 18px; padding: 10px 40px; color: #000; background: #ff3333; font-family: 'Arial Black', sans-serif; cursor: pointer; border-radius: 8px; font-weight: 900; border: 3px solid #000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); text-transform: uppercase; transition: transform 0.1s; }
-                            #main-game-iframe { width: 100%; height: 100%; border: none; }
-                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 1000000; }
+                            html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Courier New', Courier, monospace; }
+                            #viewer { width: 100%; height: 100%; border: none; background: #fff; }
+                            #panic-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; z-index: 99999; }
+                            .panic-btn { font-size: 16px; cursor: pointer; background: #ff4b4b; padding: 10px 25px; border-radius: 8px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+                            .drag-handle { cursor: grab; background: rgba(255, 255, 255, 0.6); padding: 10px 8px; border-radius: 8px; font-size: 16px; user-select: none; }
+                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
                             #panic-iframe { width: 100%; height: 100%; border: none; }
-                            .close-panic { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-family: Arial, sans-serif; color: #ccc; font-weight: bold; z-index: 1000001; user-select: none; }
+                            .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; font-weight: bold; }
                         </style>
                     </head>
                     <body>
-                        <div id="top-bar"><button class="panic-btn" onclick="doPanic()">PANIC</button></div>
-                        <iframe id="main-game-iframe" src="${fullUrl}"></iframe>
-                        <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">×</span><iframe id="panic-iframe"></iframe></div>
+                        <div id="panic-container">
+                            <div id="dragHandle" class="drag-handle">⠿</div>
+                            <button class="panic-btn" onclick="doPanic()">PANIC</button>
+                        </div>
+                        <iframe id="viewer"></iframe>
+                        <div id="panic-overlay"><span class="close-panic" onclick="closePanic()">&times;</span><iframe id="panic-iframe"></iframe></div>
                         <script>
-                            const PANIC_URL = "https://clever.com"; 
-                            function doPanic() { document.getElementById("panic-iframe").src = PANIC_URL; document.getElementById("panic-overlay").style.display = "block"; }
-                            function closePanic() { document.getElementById("panic-overlay").style.display = "none"; document.getElementById("panic-iframe").src = ""; }
-                            window.addEventListener('keydown', (e) => { if (e.ctrlKey && e.key.toLowerCase() === 'x') { doPanic(); } });
+                            async function loadGame() {
+                                const response = await fetch("${gameUrl}");
+                                let html = await response.text();
+                                const baseUrl = "${gameUrl}".substring(0, "${gameUrl}".lastIndexOf("/") + 1);
+                                html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
+                                const doc = document.getElementById("viewer").contentDocument;
+                                doc.open(); doc.write(html); doc.close();
+                            }
+                            function doPanic() { document.getElementById("panic-iframe").src = "${panicUrl}"; document.getElementById("panic-overlay").style.display = "block"; }
+                            function closePanic() { document.getElementById("panic-overlay").style.display = "none"; }
+                            loadGame();
+
+                            // Improved Drag Logic for about:blank tabs
+                            const container = document.getElementById("panic-container");
+                            const handle = document.getElementById("dragHandle");
+                            let isDragging = false;
+                            let offX, offY;
+
+                            handle.addEventListener('mousedown', (e) => {
+                                isDragging = true;
+                                const rect = container.getBoundingClientRect();
+                                offX = e.clientX - rect.left;
+                                offY = e.clientY - rect.top;
+                                handle.style.cursor = 'grabbing';
+                            });
+
+                            window.addEventListener('mousemove', (e) => {
+                                if (!isDragging) return;
+                                e.preventDefault();
+                                container.style.left = (e.clientX - offX) + "px";
+                                container.style.top = (e.clientY - offY) + "px";
+                                container.style.transform = "none";
+                                container.style.margin = "0";
+                            });
+
+                            window.addEventListener('mouseup', () => {
+                                isDragging = false;
+                                handle.style.cursor = 'grab';
+                            });
                         <\/script>
                     </body>
-                    </html>
-                `);
+                    </html>`;
+                newWin.document.write(loaderHtml);
                 newWin.document.close();
-            } else {
-                alert("Pop-up blocked! Please allow pop-ups.");
             }
         }
 
-        /* --- NEW: Game Injection Launcher --- */
-        function launchGame(gameUrl, gameTitle) {
-            const panicUrl = document.getElementById("panicUrlInput").value || 'https://clever.com';
-            const newWin = window.open('about:blank', '_blank');
-            
-            if (newWin) {
-                const loaderHtml = `
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <title>Clever | Portal</title>
-                        <style>
-                            html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
-                            #viewer { width: 100%; height: 100%; border: none; background: white; }
-                            .panic-btn {
-                                position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                                font-size: 24px; padding: 18px 50px; color: #000 !important; background: #ff3333;
-                                font-family: 'Arial Black', sans-serif; cursor: pointer; z-index: 99999;
-                                border-radius: 12px; font-weight: 900; border: 4px solid #000;
-                                box-shadow: 0 6px 20px rgba(0,0,0,0.5); transition: all 0.2s ease-in-out;
-                                text-transform: uppercase; letter-spacing: 3px;
-                            }
-                            #panic-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fff; z-index: 100000; }
-                            #panic-iframe { width: 100%; height: 100%; border: none; }
-                            .close-panic { position: absolute; top: 15px; left: 15px; font-size: 35px; cursor: pointer; color: #000 !important; font-weight: bold; z-index: 100001; }
-                        </style>
-                    </head>
-                    <body>
-                        <button class="panic-btn" onclick="doPanic()">PANIC</button>
-                        <iframe id="viewer"></iframe>
-                        <div id="panic-overlay">
-                            <span class="close-panic" onclick="closePanic()">&times;</span>
-                            <iframe id="panic-iframe"></iframe>
-                        </div>
-                        <script>
-                            const githubHTMLUrl = "${gameUrl}";
-                            const PANIC_URL = "${panicUrl}"; 
-                            async function loadGame() {
-                                try {
-                                    const response = await fetch(githubHTMLUrl);
-                                    let html = await response.text();
-                                    const baseUrl = githubHTMLUrl.substring(0, githubHTMLUrl.lastIndexOf("/") + 1);
-                                    html = html.replace("<head>", '<head><base href="' + baseUrl + '">');
-                                    const iframe = document.getElementById("viewer");
-                                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                                    iframeDoc.open();
-                                    iframeDoc.write(html);
-                                    iframeDoc.close();
-                                    iframe.onload = function() {
-                                        try {
-                                            iframe.contentWindow.addEventListener('keydown', (e) => {
-                                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
-                                            });
-                                        } catch (e) { console.log("Hotkey injection limited."); }
-                                    };
-                                } catch (err) { console.error(err); }
-                            }
-                            function doPanic() {
-                                document.getElementById("panic-iframe").src = PANIC_URL;
-                                document.getElementById("panic-overlay").style.display = "block";
-                            }
-                            function closePanic() {
-                                document.getElementById("panic-overlay").style.display = "none";
-                                document.getElementById("panic-iframe").src = "";
-                            }
-                            window.addEventListener('keydown', (e) => {
-                                if (e.ctrlKey && e.key.toLowerCase() === 'x') { e.preventDefault(); doPanic(); }
-                            });
-                            loadGame();
-                        <\/script>
-                    </body>
-                    </html>
-                `;
-                newWin.document.write(loaderHtml);
-                newWin.document.close();
-            } else {
-                alert("Pop-up blocked! Please allow pop-ups to launch games.");
-            }
+        function setupDraggable(container, handle) {
+            let isDragging = false, offsetX, offsetY;
+            handle.onmousedown = (e) => {
+                isDragging = true;
+                offsetX = e.clientX - container.offsetLeft;
+                offsetY = e.clientY - container.offsetTop;
+            };
+            document.onmousemove = (e) => {
+                if (!isDragging) return;
+                container.style.left = (e.clientX - offsetX) + "px";
+                container.style.top = (e.clientY - offsetY) + "px";
+                container.style.transform = "none";
+            };
+            document.onmouseup = () => { isDragging = false; };
         }
     </script>
 </body>
