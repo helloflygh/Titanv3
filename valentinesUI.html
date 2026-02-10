@@ -8,16 +8,18 @@ by embeding this code you agree that helloflygh is NOT responsible for any misus
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T!tan</title>
     <style>
-      :root {
-         --glass-bg: rgba(255, 240, 245, 0.7); /* Soft Lavender Blush */
-         --glass-blur: blur(12px);
-         --font-main: 'Courier New', Courier, monospace;
-         --accent-color: #ff4d6d; /* Romantic Pink/Red */
-         --text-color: #590d22;   /* Deep Wine Red for text */
+:root {
+    /* Glassy Lavender: Adjust the 0.45 for more/less transparency */
+    --glass-bg: rgba(230, 210, 255, 0.5); 
+    --glass-blur: blur(12px);
+    --font-main: 'Courier New', Courier, monospace;
+    /* Changed accent to a Valentine Red */
+    --accent-color: #ff4d6d; 
 }
 
-        * { color: #000000 !important; box-sizing: border-box; }
-
+/* Change #000000 to #800e13 (Deep Red) or #ff0054 (Hot Pink) */
+* { color: #800e13 !important; box-sizing: border-box; }
+        
         body {
             font-family: var(--font-main);
             margin: 0; padding: 0;
@@ -72,7 +74,7 @@ by embeding this code you agree that helloflygh is NOT responsible for any misus
         }
 
         .panic-btn {
-            font-size: 16px; cursor: pointer; background: #ff4b4b; padding: 10px 25px;
+            font-size: 16px; cursor: pointer; background: #ff758f; padding: 10px 25px;
             border-radius: 8px; font-weight: bold; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
@@ -105,7 +107,7 @@ by embeding this code you agree that helloflygh is NOT responsible for any misus
 
         .title { 
             position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 8px 2px; background: rgba(255, 255, 255, 0.9);
+            padding: 8px 2px; background: rgba(255, 182, 193, 0.9); /* Light Pink */
             text-align: center; font-weight: bold; font-size: 0.75rem;
             opacity: 0; transition: opacity 0.3s ease;
         }
