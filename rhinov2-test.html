@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhino Games | Charge Ahead</title>
+    <style>
+        :root {
+            --primary: #e67e22;
+            --bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text: #ffffff;
+            --search-bg: #222;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+        nav .links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        nav .links a:hover { color: var(--primary); }
+
+        .page-content { display: none; padding: 40px 5%; animation: fadeIn 0.4s ease; }
+        .active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero { text-align: center; padding: 60px 0; }
+        .hero h1 { font-size: 4rem; margin: 0; }
+        .hero h1 span { color: var(--primary); }
+        
+        .whats-new {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 40px auto;
+            border: 1px solid #333;
+            text-align: left;
+        }
+
+        #search {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #444;
+            background: var(--search-bg);
+            color: white;
+            margin: 20px 0 40px 0;
+            outline: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 25px;
+        }
+
+        .item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .item:hover { transform: scale(1.05); border-color: var(--primary); }
+
+        .item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+
+        .title {
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #req-btn {
+            background: #fff;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">RHINO<span>GAMES</span></div>
+        <div class="links">
+            <a onclick="showPage('homePage')">Home</a>
+            <a onclick="showPage('gamesPage')">Games</a>
+        </div>
+    </nav>
+
+    <div id="homePage" class="page-content active">
+        <div class="hero">
+            <h1>Welcome to <span>Rhino!</span></h1>
+            <p>Charge ahead!</p>
+        </div>
+        
+        <div class="whats-new">
+            <h3 style="color:var(--primary); margin-top:0;">What's New</h3>
+            <p>- New clean UI</p>
+            <p>- Creds to our partner site, <strong>T!tan!</strong></p>
+        </div>
+    </div>
+
+    <div id="gamesPage" class="page-content">
+        <div class="full-width-container" style="position: relative;">
+            <a href="example.com" id="req-btn" target="_blank" style="position: absolute; top: 0; right: 0;">📃 Request</a>
+            <h1 style="margin:0;">Games</h1>
+            <input type="text" placeholder="Search Games..." id="search" onkeyup="filterImages()">
+            
+            <div class="grid" id="grid">
+                <div class="item" data-title="Moto X3M" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m.htm')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m.png"></a><div class="title">Moto X3M</div></div>
+                <div class="item" data-title="Moto X3M 2" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m2.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-2-m186x186.webp"><div class="title">Moto X3M 2</div></div>
+                <div class="item" data-title="Moto X3M 3" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-HTML-Games-Pack/master/offline/motox3m3.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/moto-x3m-3-m186x186.webp"><div class="title">Moto X3M 3</div></div>
+                <div class="item" data-title="Slope" onclick="launchGame('https://raw.githubusercontent.com/CoolDude2349/Offline-Single-File-Games/master/offline/slope.html')"><img src="https://raw.githubusercontent.com/helloflygh/games/main/download%20(4).png"><div class="title">Slope</div></div>
+            </div>
+            <div id="no-results" style="display:none; padding:40px; text-align:center;">No games found.</div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function filterImages() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let items = document.querySelectorAll('.item');
+            let noRes = document.getElementById('no-results');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                let title = item.getAttribute('data-title').toLowerCase();
+                if (title.includes(input)) {
+                    item.style.display = "block";
+                    visibleCount++;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+            noRes.style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        async function launchGame(url) {
+            // 1. Open the window immediately
+            const gameWin = window.open('about:blank', '_blank');
+            
+            if (!gameWin) {
+                alert("Please allow popups to play!");
+                return;
+            }
+
+            // 2. Set the Tab Name (Cloaking)
+            gameWin.document.title = "Clever | Portal";
+
+            // 3. Show Loader in the same window
+            gameWin.document.body.innerHTML = `
+                <div style="background:#0f0f0f; color:#e67e22; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; margin:0;">
+                    <h1>RHINO GAMES</h1>
+                    <p style="color:#fff;">Charging ahead...</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch(url);
+                const code = await response.text();
+                
+                // 4. Inject Game Code
+                gameWin.document.open();
+                gameWin.document.write(code);
+                // Re-apply title after document.write because write() can reset it
+                gameWin.document.title = "Clever | Portal"; 
+                gameWin.document.close();
+            } catch (err) {
+                gameWin.document.body.innerHTML = `<p style="color:white;text-align:center;">Error loading game content.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
